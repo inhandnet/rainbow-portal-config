@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var cloud=new Object();
+    cloud.inPortalApiHost="http://api.m.inhand.com.cn:5280";
+    cloud.afterLoginSucessPage="http://www.baidu.com";
+    //qq的回调地址（就是指向本页的）
+    cloud.qqCallBackPage="http://qq.u2wifi.cn/login_page/QQ/servercallbackpage.html";
+    //回调函数
+    function getQqToken_callback(data){
+        //获取三方token的回调函数
+        //应在此设置跳转和传递数据以及错误提示
+        if(data.error_code){
+            console.log(data);
+        }else{
+            window.location.href=cloud.afterLoginSucessPage;
+        }
+    }
+</script>
+<script type="text/javascript">
+    //序列化查询参数
+    function formatData(uri,jsonObj,callbackName){
+        var urlParams="";
+        for(i in jsonObj){
+            urlParams=urlParams+i+"="+encodeURIComponent(jsonObj[i])+"&";
+        }
+        urlParams=urlParams+"call_back="+callbackName;
+        return uri+"?"+urlParams;
+    };
+    var uri=window.location.href;
+    var prenum=uri.indexOf("=");
+    var aftnum=uri.indexOf("&");
+    authorization_code=uri.substring(prenum+1);
+    console.log(authorization_code);
+    var scriptELe=document.createElement("script");
+    scriptELe.type="text/javascript";
+    var uri=cloud.inPortalApiHost+"/api/gateway/validate_code";
+    var jsonObj={
+        "grant_type":"authorization_code",
+        "as_type":1,
+        "code":authorization_code,
+        "redirect_url":cloud.qqCallBackPage
+    };
+    var url=formatData(uri,jsonObj,"getQqToken_callback");
+    scriptELe.src=url;
+    document.body.appendChild(scriptELe);
+</script>
+</body>
+</html>

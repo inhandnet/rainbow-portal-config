@@ -1,0 +1,6 @@
+{
+    "version":"阿里云1.7",
+    "deviceVersion":"V1.0.0.r5326",
+	//"feature":"微信登录回调页未测试，修改三方登录client-id"
+	"feature":"获取手机码后自动填充输入框"
+}

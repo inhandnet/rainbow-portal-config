@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    <div class="row portal-line-height">
+        <div class="col-xs-5 col-sm-8 col-md-8 col-lg-9">
+        </div>
+        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">
+        </div>
+        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+            <div class="my-float">
+                <span class="my-font-style" id="return-to-homepage" data-lang="{text:return_to_home}"></span>
+            </div>
+        </div>
+    </div>
+    <form id="inner-view-container" class="form-horizontal container-fluid my-pre-step-next-step-height" role="form">
+        <div class="row portal-height"></div>
+        <div class="row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:interface_type}"></label>
+                <div class="col-sm-3">
+                    <select id="wan_port" class="form-control">
+                        <option value=1>3G/LTE</option>
+                        <option value=2>ADSL</option>
+                        <option value=3>DHCP</option>
+                        <option value=4>Static Ip Address</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row cell-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:apn}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="cellular-apn" class="form-control validate[required]"  />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row cell-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:username}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="cellular-username" class="form-control validate[required]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row cell-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:password}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="cellular-password" class="form-control validate[required]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row cell-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:dial_numbers}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="cellular-dial-number" class="form-control validate[required]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row adsl-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:username}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="adsl-username" class="form-control validate[required]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row adsl-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:password}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="adsl-password" class="form-control validate[required]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row static-ip-address-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:main_ip}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="static-ip-address-main-ip" class="form-control validate[required,custom[ip]]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row static-ip-address-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:subnet_mask}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="static-ip-address-subnet-mask" class="form-control validate[required,custom[ip]]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row static-ip-address-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:gateway}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="static-ip-address-gateway" class="form-control validate[required,custom[ip]]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row static-ip-address-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:preferred_domain}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="static-ip-address-preferred-domain" class="form-control validate[required,custom[ip]]]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="row static-ip-address-row">
+            <div class="form-group">
+                <label class="col-sm-3 control-label" data-lang="{text:alternate_domain}"></label>
+                <div class="col-sm-3">
+                    <input type="text" id="static-ip-address-alternate-domain" class="form-control validate[custom[ip]]" />
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">
+            </div>
+        </div>
+        <div class="my-pre-step-next-step-position">
+            <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="pre-step" data-lang="{text:pre_step}"></button>
+            <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="next-step" data-lang="{text:next_step}"></button>
+        </div>
+    </form>
+</div>

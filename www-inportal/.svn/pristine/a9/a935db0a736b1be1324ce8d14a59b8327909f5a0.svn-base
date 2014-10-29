@@ -1,0 +1,1324 @@
+<% pagehead(menu.setup_wlan) %>
+
+<style type='text/css'>
+#redial-grid {
+	text-align: center;	
+	width: 700px;
+}
+
+#redial-grid .co1 {
+	width: 40px;
+}
+#redial-grid .co2 {
+	width: 80px;
+}
+</style>
+
+<script type='text/javascript'>
+
+<% ih_sysinfo(); %>
+<% ih_user_info(); %>
+	     
+<% web_exec('show running-config dot11') %>
+
+var station_role = 0;
+var wlan_auth_type_list = [[1, ui.ap_auth_open],[2, ui.ap_auth_shared]];
+var wlan_encrypt_type_list = [['1', ui.wlan_encrypt_wep40],['2', ui.wlan_encrypt_wep104],
+			['3', ui.wlan_encrypt_tkip],['4', ui.wlan_encrypt_aes_ccmp]];
+var wlan_wep_encrypt_type_list = [[1, ui.wlan_encrypt_wep40],[2, ui.wlan_encrypt_wep104]];
+var wlan_wep_key_id_list = [['1', '1'], ['2', '2'], ['3', '3'],['4', '4']];
+var wep_key_len_5alpha_list = [['1', ui.wlan_wep_key_len_5alpha], ['2', ui.wlan_wep_key_len_10hex]];
+var wep_key_len_13alpha_list = [['1', ui.wlan_wep_key_len_13alpha], ['2', ui.wlan_wep_key_len_26hex]];
+var wep_key_len_16alpha_list = [['1', ui.wlan_wep_key_len_16alpha], ['2', ui.wlan_wep_key_len_32hex]];
+var wlan_security_ie_list = [['1', ui.wlan_security_ie_wpa1], ['2', ui.wlan_security_ie_wpa2]];
+var wlan_psk_type_list = [[1, ui.wlan_psk_type_pass_phrase], [2, ui.wlan_psk_type_raw_key]];
+
+var wlan_radio_mode_list = [['1', ui.wlan_80211b], ['2', ui.wlan_80211g],
+			['3', ui.wlan_80211n], ['4', ui.wlan_80211gn]];
+/*var wlan_channel_list = [[1, '1'], [2, '2'], [3, '3'],  [4, '4'],  
+			[5, '5'],  [6, '6'], [7, '7'],  [8, '8'],  
+			[9, '9'],  [10, '10'],  [11, '11'],  [12, '12'], 
+			[13, '13'],  [14, '14']];*/
+var wlan_channel_list = [[1, '1'], [2, '2'], [3, '3'],  [4, '4'],  
+			[5, '5'],  [6, '6'], [7, '7'],  [8, '8'],  
+			[9, '9'],  [10, '10'],  [11, '11'],  [12, '12'], 
+			[13, '13']];
+var wlan_tx_power_list = [[1, '1'], [5, '5'], [20, '20']];
+
+
+/******************************************************************************/
+function isHex(str)
+{
+	//var reg = /^-?\d+$/;
+	var reg = /^[0-9a-fA-F]+$/;
+	return reg.test(str);
+}
+
+function is_ssid(str)
+{
+	var reg = /^[0-9a-zA-Z_]+$/;
+	return reg.test(str);
+}
+
+/* PSK, a string of 8 to 63 displayable characters or a hexadecimal number of the length of 64 */
+function is_passphrase(str)
+{
+	var reg = /^[\x21-\x7e]+$/;
+	return reg.test(str);
+}
+
+function  _v_f_hex(f, quiet)
+{
+	if (isHex(f.value) == 0){
+		ferror.set(f, errmsg.num, quiet);
+		return 0;
+	}
+
+	ferror.clear(f);
+	return 1;
+}
+
+function v_f_length_wifi(f, quiet, min, max)
+{
+	var s, n;
+
+	s = f.value.trim();
+	n = s.length;
+	if (min == undefined) min = 1;
+
+	if (min == max) {
+		if (n < min || n > max) {
+			ferror.set(f, errmsg.len + ' = ' + min + '.', quiet);
+			return 0;
+		}
+	}
+
+	if (n < min) {
+		ferror.set(f, errmsg.len + ' >= ' + min + '.', quiet);
+		return 0;
+	}
+	max = max || f.maxlength;
+	if (n > max) {
+		ferror.set(f, errmsg.len + ' <= ' + max + '.', quiet);
+		return 0;
+	}
+	ferror.clear(f);
+	return 1;
+}
+
+function v_f_text_wifi(f, quiet, len_min, len_max)
+{
+	if (_v_f_blank_text(f, quiet) == 0) return 0;
+	
+	if (v_f_length_wifi(f, quiet, len_min, len_max) == 0) return 0;
+
+	return v_f_cn_text(f, quiet);	
+}
+
+/* ssid-name：设置SSID 的名称。为1～32 个字符的字符串，可以包含字母、数字及下划线，区分
+大小写，不可以包含空格*/
+function v_f_ssid_wifi (f, quiet)
+{
+	if (v_f_length(f, 0, 1, 32) == 0)
+		return 0;
+	
+	if (!is_ssid(f.value)) {
+		ferror.set(f, errmsg.ssid, quiet);
+		return 0;
+	}
+
+	return 1;
+}
+
+function  v_f_passphrase(f, quiet)
+{
+	if (v_f_length_wifi(f, quiet, 8, 63) == 0)
+		return 0;
+
+	if (is_passphrase(f.value) == 0){
+		ferror.set(f, errmsg.psk, quiet);
+		return 0;
+	}
+
+	ferror.clear(f);
+	return 1;
+}
+
+
+/******************************************************************************/
+
+
+/******************************************************************************/
+function ap_display()
+{
+	var auth_type = E('_wlan0_auth_type').value; 
+	var encrypt = E('_wlan0_encrypt').checked;
+	var encrypt_type = E('_wlan0_encrypt_type').value;
+
+	/*elem.display_and_enable(('_wlan0_sta_auth_type'), ('_wlan0_sta_ssid'), 
+			('_wlan0_sta_encrypt'), false);
+	
+	elem.display_and_enable(('_wlan0_sta_encrypt_type'), ('_wlan0_sta_wep_key_id'), 
+				('_wlan0_sta_wep_key_len_5alpha'), ('_wlan0_sta_wep_key_len_13alpha'), 
+				('_wlan0_sta_wep_key'), ('_wlan0_sta_security_ie'), 
+				('_wlan0_sta_psk_type'), ('_wlan0_sta_psk'), false);
+	*/
+	/* radio */
+	elem.display_and_enable(('_wlan0_radio_mode'), ('_wlan0_channel'), 
+			('_wlan0_tx_power'), true);
+
+	if (encrypt) {
+		if (auth_type == 1) {
+			elem.display_and_enable(('_wlan0_encrypt_type'), 
+				('_wlan0_wep_key_id'), 
+				('_wlan0_wep_key_len_5alpha'), ('_wlan0_wep_key_len_13alpha'), 
+				('_wlan0_wep_key'), ('_wlan0_security_ie'), 
+				('_wlan0_psk_type'), ('_wlan0_psk'), true);
+			elem.display_and_enable(('_wlan0_wep_encrypt_type'), false);
+		} else if (auth_type == 2) {
+			elem.display_and_enable(('_wlan0_encrypt_type'), 
+				('_wlan0_psk_type'), ('_wlan0_psk'), false);
+			elem.display_and_enable(('_wlan0_wep_encrypt_type'), 
+				('_wlan0_wep_key_id'), ('_wlan0_wep_key_len_5alpha'), 
+				('_wlan0_wep_key_len_13alpha'), 
+				('_wlan0_wep_key'), true);
+		}		
+	} else {
+		elem.display_and_enable(('_wlan0_encrypt_type'), ('_wlan0_wep_key_id'), 
+				('_wlan0_wep_key_len_5alpha'), ('_wlan0_wep_key_len_13alpha'), 
+				('_wlan0_wep_key'), ('_wlan0_security_ie'), 
+				('_wlan0_psk_type'), ('_wlan0_psk'), 
+				('_wlan0_wep_encrypt_type'), false);
+	}
+
+	if (encrypt && (encrypt_type == 1)) {
+		elem.display_and_enable(('_wlan0_wep_key_id'), ('_wlan0_wep_key_len_5alpha'), 
+			('_wlan0_wep_key'), true);
+		elem.display_and_enable(('_wlan0_security_ie'), ('_wlan0_psk_type'), 
+			('_wlan0_psk'), ('_wlan0_wep_key_len_13alpha'), false);
+	} else if (encrypt && (encrypt_type == 2)) {
+		elem.display_and_enable(('_wlan0_wep_key_id'), ('_wlan0_wep_key_len_13alpha'), 
+			('_wlan0_wep_key'), true);
+		elem.display_and_enable(('_wlan0_security_ie'), ('_wlan0_psk_type'), 
+			('_wlan0_psk'), ('_wlan0_wep_key_len_5alpha'), false);
+	} else if (encrypt && auth_type == 1) { 
+		if (encrypt && ((encrypt_type == 3) || (encrypt_type == 4))) {
+			elem.display_and_enable(('_wlan0_wep_key_id'), 
+				('_wlan0_wep_key_len_5alpha'), ('_wlan0_wep_key_len_13alpha'), 
+				('_wlan0_wep_key'), false);
+			elem.display_and_enable(('_wlan0_security_ie'), ('_wlan0_psk_type'), 
+				('_wlan0_psk'), true);
+		}
+	}	
+	
+	// test
+	elem.display_and_enable(('_wlan0_security_ie'), false);
+}
+
+function client_display()
+{
+	var sta_encrypt = E('_wlan0_sta_encrypt').checked;
+	var sta_encrypt_type = E('_wlan0_sta_encrypt_type').value;
+
+	/*elem.display_and_enable(('_wlan0_auth_type'), ('_wlan0_ssid'), 
+				('_wlan0_encrypt'), false);
+	
+	elem.display_and_enable(('_wlan0_encrypt_type'), ('_wlan0_wep_key_id'), 
+				('_wlan0_wep_key_len_5alpha'), ('_wlan0_wep_key_len_13alpha'), 
+				('_wlan0_wep_key'), ('_wlan0_security_ie'), 
+				('_wlan0_psk_type'), ('_wlan0_psk'), false);
+	
+	elem.display_and_enable(('_wlan0_radio_mode'), ('_wlan0_channel'), 
+				('_wlan0_tx_power'), false);
+	*/
+
+	elem.display_and_enable(('_wlan0_sta_auth_type'), ('_wlan0_sta_ssid'), 
+				('_wlan0_sta_encrypt'), true);
+
+	if (sta_encrypt) {
+		elem.display_and_enable(('_wlan0_sta_encrypt_type'), true);
+	} else {
+		elem.display_and_enable(('_wlan0_sta_encrypt_type'), ('_wlan0_sta_wep_key_id'), 
+				('_wlan0_sta_wep_key_len_5alpha'), ('_wlan0_sta_wep_key_len_13alpha'), 
+				('_wlan0_sta_wep_key'), ('_wlan0_sta_security_ie'), 
+				('_wlan0_sta_psk_type'), ('_wlan0_sta_psk'), false);
+	}
+
+	if (sta_encrypt && (sta_encrypt_type == 1)) {
+		elem.display_and_enable(('_wlan0_sta_wep_key_id'), ('_wlan0_sta_wep_key_len_5alpha'), 
+			('_wlan0_sta_wep_key'), true);
+		elem.display_and_enable(('_wlan0_sta_security_ie'), ('_wlan0_sta_psk_type'), 
+			('_wlan0_sta_psk'), ('_wlan0_sta_wep_key_len_13alpha'), false);
+	} else if (sta_encrypt && (sta_encrypt_type == 2)) {
+		elem.display_and_enable(('_wlan0_sta_wep_key_id'), ('_wlan0_sta_wep_key_len_13alpha'), 
+			('_wlan0_sta_wep_key'), true);
+		elem.display_and_enable(('_wlan0_sta_security_ie'), ('_wlan0_sta_psk_type'), 
+			('_wlan0_sta_psk'), ('_wlan0_sta_wep_key_len_5alpha'), false);
+	} else if (sta_encrypt && ((sta_encrypt_type == 3) || (sta_encrypt_type == 4))) {
+		elem.display_and_enable(('_wlan0_sta_wep_key_id'), 
+			('_wlan0_sta_wep_key_len_5alpha'), ('_wlan0_sta_wep_key_len_13alpha'), 
+			('_wlan0_sta_wep_key'), false);
+		elem.display_and_enable(('_wlan0_sta_security_ie'), ('_wlan0_sta_psk_type'), 
+			('_wlan0_sta_psk'), true);
+	}	 
+	
+	// test
+	elem.display_and_enable(('_wlan0_sta_security_ie'), false);
+}
+
+function sta_connect()
+{
+	var fom = E('role_client_connect_button');
+	var cmd = '';
+	
+	cmd += "!\n";
+	cmd += "interface dot11radio 1\n";
+	cmd += "client-mode connect \n";
+	
+	fom._web_cmd.value = cmd;
+
+	/*alert("sta_connect");
+	alert(fom._web_cmd.value);*/
+
+	//form.submit(fom, 1);
+	//test	
+	fom.submit();
+	reloadPage();
+}
+
+function sta_disconnect()
+{
+	var fom = E('role_client_connect_button');
+	var cmd = '';
+	
+	cmd += "!\n";
+	cmd += "interface dot11radio 1\n";
+
+	cmd += "client-mode disconnect \n";
+	
+	fom._web_cmd.value = cmd;
+
+	/*alert("sta_disconnect");
+	alert(fom._web_cmd.value);*/
+
+	//form.submit(fom, 1);
+	//test	
+	fom.submit();
+	reloadPage();
+}
+
+function genConnectButton(args)
+{
+	W("<div id='connect_button'>");
+	W("<span id='footer-msg'></span>");
+	W("<input type='button' style='width:100px' value='" + ui.connect + 
+		"' id='connect-button' onclick='sta_connect(" + args + ")'>");
+	W("<input type='button' style='width:100px' value='" + ui.disconnect + 
+		"' id='disconnect-button' onclick='sta_disconnect(" + args + ")'>");	
+	W("</div>");
+}
+
+
+function check(role)
+{
+	if (role=="AP") {
+		document.getElementById("role_ap").style.display="";
+		document.getElementById("role_client").style.display="none";
+		document.getElementById("role_client_connect_button").style.display="none";
+		station_role = 1;
+		
+		ap_display();
+	} else if (role=="Client") {
+		document.getElementById("role_ap").style.display="none";
+		document.getElementById("role_client").style.display="";
+		document.getElementById("role_client_connect_button").style.display="";
+		station_role = 2;
+
+		client_display();
+	} else {
+		document.getElementById("role_ap").style.display="none";
+		document.getElementById("role_client").style.display="none";
+		document.getElementById("role_client_connect_button").style.display="none";
+		station_role = 0;
+	}
+}
+/******************************************************************************/
+
+function wlanInit_test()
+{
+	check("");
+
+	elem.display_and_enable(('_wlan0_encrypt_type'), ('_wlan0_wep_key_id'), 
+				('_wlan0_wep_key_len_5alpha'), ('_wlan0_wep_key_len_13alpha'), 
+				('_wlan0_wep_key'), ('_wlan0_security_ie'), 
+				('_wlan0_psk_type'), ('_wlan0_psk'), false);
+
+	/* radio */
+	elem.display_and_enable(('_wlan0_radio_mode'), ('_wlan0_channel'), 
+			('_wlan0_tx_power'), false);
+
+	E('save-button').disabled = true;
+}
+
+function wlanInit()
+{
+	if (wlan0_config.station_role == 1) {
+		document.getElementById("radio_ap").checked = true;
+		document.getElementById("radio_client").checked=false;
+		check("AP");
+		
+	} else if (wlan0_config.station_role == 2) {
+		document.getElementById("radio_client").checked = true;
+		document.getElementById("radio1").checked=true;
+		check("Client");
+	}
+
+	E('save-button').disabled = true;
+}
+
+function show_ap_conf(quiet)
+{
+	var i;
+	var ok = 1;
+	var cmd = "";
+	//var fom = E('_fom');
+	var fom;
+	//var data_changed = 0;
+	var if_mode = 0;
+	var ssid_mode = 0;
+
+	if (station_role == 1)
+		fom = E('role_ap'); 
+	else if (station_role == 2)
+		fom = E('role_client');
+	else
+		return -1;
+	
+	E('save-button').disabled = true;
+
+	// select
+	var auth_type = E('_wlan0_auth_type').value; 
+	var ssid = E('_wlan0_ssid').value;
+	// visibility, checkbox 
+	var encrypt = E('_wlan0_encrypt').checked ;
+	var encrypt_type = E('_wlan0_encrypt_type').value;
+	if (auth_type == 2)
+		encrypt_type = E('_wlan0_wep_encrypt_type').value;
+	var encrypt_type_changed = ((encrypt_type != wlan0_config.encrypt_type) ? true:false);
+
+	var wep_key_id = E('_wlan0_wep_key_id').value;
+	var wep_key_len_5alpha = E('_wlan0_wep_key_len_5alpha').value;
+	var wep_key_len_13alpha = E('_wlan0_wep_key_len_13alpha').value;
+	var wep_key = E('_wlan0_wep_key').value;
+
+	var security_ie = E('_wlan0_security_ie').value;
+	var psk_type = E('_wlan0_psk_type').value;
+	var psk = E('_wlan0_psk').value;
+
+	var radio_mode = E('_wlan0_radio_mode').value; 
+	var channel = E('_wlan0_channel').value;
+	var tx_power = E('_wlan0_tx_power').value;
+
+	var auth_type_changed = ((auth_type != wlan0_config.auth_type) ? true:false);
+	var ssid_changed = ((ssid != wlan0_config.ssid) ? true:false);
+	var encrypt_changed = ((!encrypt != !wlan0_config.encrypt) ? true:false);
+
+	var wep_key_id_changed = ((wep_key_id != wlan0_config.wep_key_id) ? true:false);	
+	var wep_key_changed = ((wep_key != wlan0_config.wep_key) ? true:false);
+
+	var psk_type_changed = ((psk_type != wlan0_config.psk_key_type) ? true:false); 
+	var psk_changed = ((psk != wlan0_config.psk_key) ? true:false);
+
+	var radio_mode_changed = ((radio_mode != wlan0_config.radio_mode) ? true:false);
+	var channel_changed = ((channel != wlan0_config.channel) ? true:false);
+	var tx_power_changed = ((tx_power != wlan0_config.tx_power) ? true:false);
+	var maxsta = E('_wlan0_maxsta').value;
+
+	/* verify */
+	/*alert("ssid_changed " + ssid_changed);*/
+
+	/* blank */
+	if (!v_info_word('_wlan0_ssid',quiet,false)) return -1;
+/*	
+	if (!_v_f_blank_text(E('_wlan0_ssid'), 0)) {
+		//alert("SSID can't have spaces !");
+		return -1;
+	}
+*/
+	/* not blank , not null */
+/*	//if (ssid != '' && (v_f_length(E('_wlan0_ssid'), 0, 1, 32) == 0))
+	if (ssid != '' && (v_f_ssid_wifi(E('_wlan0_ssid'), 0, 1, 32) == 0))
+		return -1;
+*/
+	if (ssid_changed) {
+		/*if (wlan0_config.ssid != '') {
+			
+		}*/ 
+
+		if (ssid == '') {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "no ssid " + wlan0_config.ssid + "\n";
+
+			cmd += "!\n";
+			cmd += ("no dot11 ssid " + wlan0_config.ssid + "\n");
+			cmd += "!\n";
+		} else {
+			if (wlan0_config.ssid != '') {
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += "no ssid " + wlan0_config.ssid + "\n";
+
+				cmd += "!\n";
+				cmd += ("no dot11 ssid " + wlan0_config.ssid + "\n");
+				cmd += "!\n";
+			}
+
+			cmd += "!\n";
+			cmd += ("dot11 ssid " + ssid + "\n");
+	 
+			if (encrypt && (encrypt_type == '3' || encrypt_type == '4')) {
+				if (psk == '')
+					return -1;
+				
+				if (!_v_f_blank_text(E('_wlan0_psk'), 0)) 
+					return -1;
+			
+				if (psk_type == 1) {
+					/*if (v_f_length_wifi(E('_wlan0_psk'), 0, 8, 63) == 0) 
+						return -1;*/
+					if (v_f_passphrase(E('_wlan0_psk'), 0) == 0)
+						return -1;					
+					cmd += ("wpa-psk ascii  " + psk + "\n");
+				} else if (psk_type == 2) {
+					if (_v_f_hex(E('_wlan0_psk'), 0) == 0)
+							return -1; 
+					if (v_f_length_wifi(E('_wlan0_psk'), 0, 64, 64) == 0) 
+						return -1;
+					cmd += ("wpa-psk hex  " + psk + "\n");
+				}
+			}
+	 
+			if (auth_type_changed) {
+				cmd += "!\n";
+				cmd += ("dot11 ssid " + ssid + "\n");
+
+				if (auth_type == 1) {
+					cmd += "authentication open \n";
+				} else if (auth_type == 2) {
+					if (!encrypt) {
+						return -1;
+					}
+					cmd += "authentication shared \n";
+				} else {
+					alert("Error auth type [" + auth_type + "]");
+					return -1;
+				}
+			}
+
+			if (!v_info_num_range(E('_wlan0_maxsta'),quiet,true,1,64)) return 0;
+			if (maxsta != wlan0_config.max_sta_num) {
+				cmd += "!\n";
+				cmd += ("dot11 ssid " + ssid + "\n");
+				if (maxsta == '')
+					cmd += "no max-associations\n";
+				else
+					cmd += "max-associations " + maxsta + "\n";
+			}
+
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += ("ssid " + ssid + "\n");
+		}
+	} else {
+		if (ssid != '') {
+			if (encrypt && (encrypt_type == '3' || encrypt_type == '4')
+					&& (psk_type_changed || psk_changed)) {
+				if (psk == '')
+					return -1;
+				if (!_v_f_blank_text(E('_wlan0_psk'), 0)) 
+					return -1;
+
+				cmd += "!\n";
+				cmd += ("dot11 ssid " + ssid + "\n");
+				if (psk_type == 1) {
+					/*if (v_f_length_wifi(E('_wlan0_psk'), 0, 8, 63) == 0) 
+						return -1;*/
+					if (v_f_passphrase(E('_wlan0_psk'), 0) == 0)
+						return -1;
+
+					cmd += ("wpa-psk ascii  " + psk + "\n");
+				} else if (psk_type == 2) {
+					if (v_f_length_wifi(E('_wlan0_psk'), 0, 64, 64) == 0) 
+						return -1;
+					cmd += ("wpa-psk hex  " + psk + "\n");
+				} else {
+					alert(" error psk type" + psk_type);
+					return -1;
+				}
+			} 
+			
+			if (encrypt_changed && !encrypt) {
+				cmd += "!\n";
+				cmd += ("dot11 ssid " + ssid + "\n");
+				cmd += ("no wpa-psk\n");
+			}
+
+			if (auth_type_changed) {
+				cmd += "!\n";
+				cmd += ("dot11 ssid " + ssid + "\n");
+
+				if (auth_type == 1) {
+					cmd += "authentication open \n";
+				} else if (auth_type == 2) {
+					if (!encrypt) {
+						return -1;
+					}
+					cmd += "authentication shared \n";
+				} else {
+					alert("Error auth type [" + auth_type + "]");
+					return -1;
+				}	
+			}
+
+			if (!v_info_num_range(E('_wlan0_maxsta'),quiet,true,1,64)) return 0;
+			if (maxsta != wlan0_config.max_sta_num) {
+				cmd += "!\n";
+				cmd += ("dot11 ssid " + ssid + "\n");
+				if (maxsta == '')
+					cmd += "no max-associations\n";
+				else
+					cmd += "max-associations " + maxsta + "\n";
+			}
+		} 
+	}
+
+	//alert("encrypt_changed " + encrypt_changed);
+	// test 
+	if (encrypt) {
+		/* Can't be null */	
+		if (!v_info_word('_wlan0_ssid',quiet,false)) return -1;
+/*
+		if (v_f_text(E('_wlan0_ssid'), 0, 1, 32) == 0)
+				return -1;
+*/		
+	}
+
+	if (encrypt_changed) {
+		if (encrypt) {
+			if (encrypt_type == '1') {
+				if (wep_key == '') {
+					return -1;
+				} else {
+					if (wep_key_len_5alpha == '1') {
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 5, 5) == 0)
+							return -1;
+					}
+					if (wep_key_len_5alpha == '2') {
+						if (_v_f_hex(E('_wlan0_wep_key'), 0) == 0)
+							return -1; 
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 10, 10) == 0)
+							return -1;
+					}
+				} 
+				
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				if (wep_key_len_5alpha == '1') {
+					cmd += ("encryption mode ciphers wep40 \n");
+					cmd += ("encryption key " + wep_key_id + 
+						" size " + "40bit ascii " + wep_key +
+						" " + wep_key_id + "\n");
+				} else if (wep_key_len_5alpha == '2') {
+					cmd += ("encryption mode ciphers wep40 \n");
+					cmd += ("encryption key " + wep_key_id + 
+						" size " + "40bit hex " + wep_key +
+						" " + wep_key_id + "\n");
+
+				}
+
+			} else if (encrypt_type == '2') {
+				if (wep_key == '') {
+					return -1;
+				} else {
+					if (wep_key_len_13alpha == '1') {
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 13, 13) == 0)
+							return -1;
+					}
+					if (wep_key_len_13alpha == '2') {
+						if (_v_f_hex(E('_wlan0_wep_key'), 0) == 0)
+							return -1; 
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 26, 26) == 0)
+							return -1;
+					}
+				} 
+								
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				if (wep_key_len_13alpha == '1') {
+					cmd += ("encryption mode ciphers wep104 \n");
+					cmd += ("encryption key " + wep_key_id + 
+						" size " + "104bit ascii " + wep_key + 
+						" " + wep_key_id + "\n");
+				} else if (wep_key_len_13alpha == '2') {
+					cmd += ("encryption mode ciphers wep104 \n");
+					cmd += ("encryption key " + wep_key_id + 
+						" size " + "104bit hex " + wep_key + 
+						" " + wep_key_id + "\n");
+				}
+				
+			} else if (encrypt_type == '3') {
+				if (psk == '')
+					return -1;
+
+				/*encryption [vlan vlan] mode ciphers
+				{[aes-ccm |  | cmic | ckip-cmic | tkip]}
+				{[wep128 | wep40]}*/
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += 	"no encryption \n ";
+				cmd += 	"encryption mode ciphers tkip\n ";			
+			} else if (encrypt_type == '4') {
+				if (psk == '')
+					return -1;
+
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += 	"no encryption \n ";
+				cmd += 	"encryption mode ciphers aes-ccm\n "
+			}
+		} else {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "no encryption\n";
+		}
+	} else {
+		if (encrypt) {
+			if (encrypt_type == '1') {
+				if (wep_key == '') {
+					return -1;
+				}
+				
+				if (wep_key_id_changed || wep_key_changed) {
+					if (wep_key_len_5alpha == '1') {
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 5, 5) == 0)
+							return -1;
+					}
+					if (wep_key_len_5alpha == '2') {
+						if (_v_f_hex(E('_wlan0_wep_key'), 0) == 0)
+							return -1; 
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 10, 10) == 0)
+							return -1;
+					}
+
+					cmd += "!\n";
+					cmd += "interface dot11radio 1\n";
+					if (wep_key_len_5alpha == '1') {
+						cmd += ("encryption mode ciphers wep40 \n");
+						cmd += ("encryption key " + wep_key_id + 
+							" size " + "40bit ascii " + wep_key +
+							" " + wep_key_id + "\n");
+					} else if (wep_key_len_5alpha == '2') {
+						cmd += ("encryption mode ciphers wep40 \n");
+						cmd += ("encryption key " + wep_key_id + 
+							" size " + "40bit hex " + wep_key +
+							" " + wep_key_id + "\n");
+					}
+				}
+			} else if (encrypt_type == '2') {
+				if (wep_key == '') {
+					return -1;
+				} 
+
+				if (wep_key_id_changed || wep_key_changed) {
+					if (wep_key_len_13alpha == '1') {
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 13, 13) == 0)
+							return -1;
+					}
+					if (wep_key_len_13alpha == '2') {
+						if (_v_f_hex(E('_wlan0_wep_key'), 0) == 0)
+							return -1; 
+						if (v_f_text_wifi(E('_wlan0_wep_key'), 0, 26, 26) == 0)
+							return -1;
+					}
+					cmd += "!\n";
+					cmd += "interface dot11radio 1\n";
+					if (wep_key_len_13alpha == '1') {
+						cmd += ("encryption mode ciphers wep104 \n");
+						cmd += ("encryption key " + wep_key_id + 
+							" size " + "104bit ascii " + wep_key + 
+							" " + wep_key_id + "\n");
+					} else if (wep_key_len_13alpha == '2') {
+						cmd += ("encryption mode ciphers wep104 \n");
+						cmd += ("encryption key " + wep_key_id + 
+							" size " + "104bit hex " + wep_key + 
+							" " + wep_key_id + "\n");
+					}
+				}
+
+			} else if (encrypt_type == '3') {
+				if (psk == '')
+					return -1;
+
+				if (encrypt_type_changed || psk_type_changed) {
+					cmd += "!\n";
+					cmd += "interface dot11radio 1\n";
+					cmd += 	"no encryption \n ";
+					cmd += 	"encryption mode ciphers tkip\n ";
+				}
+			} else if (encrypt_type == '4') {
+				if (psk == '')
+					return -1;
+
+				if (encrypt_type_changed || psk_type_changed) {
+					cmd += "!\n";
+					cmd += "interface dot11radio 1\n";
+					cmd += 	"no encryption \n ";
+					cmd += 	"encryption mode ciphers aes-ccm\n ";
+				}
+			}			
+		} else {
+			// do nothing
+		}
+	}
+
+	//alert("station_role " + station_role);
+	if (station_role != wlan0_config.station_role) {
+		//data_changed = 1;
+
+		if (station_role == 1) {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "station-role ap\n";
+		} else if  (station_role == 2) {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "station-role workgroup-bridge\n";
+		}
+	}
+
+	/* verify radio */
+	if (radio_mode_changed) {
+		cmd += "!\n";
+		cmd += "interface dot11radio 1\n";
+		switch (radio_mode) {
+		case '1':
+			cmd += "radio-type dot11b \n";
+			break;
+		case '2':
+			cmd += "radio-type dot11g \n";
+			break;
+		case '3':
+			cmd += "radio-type dot11n \n";
+			break;
+		case '4':
+			cmd += "radio-type dot11gn \n";
+			break;
+		default:
+			alert("Error radio mode " + radio_mode);
+			retuen -1;
+		}
+	}
+
+	if (channel_changed) {
+		cmd += "!\n";
+		cmd += "interface dot11radio 1\n";
+		cmd += ("channel " + channel + "\n");	
+	}
+
+	if (tx_power_changed) {
+		cmd += "!\n";
+		cmd += "interface dot11radio 1\n";
+		cmd += ("power local " + tx_power + "\n");	
+	}
+	
+	//test
+	//alert("cmd=" + cmd);
+
+	if (user_info.priv < admin_priv) {
+		elem.display('save-button', 'cancel-button', false);
+	}else {
+		elem.display('save-button', 'cancel-button', true);
+		fom._web_cmd.value = cmd;
+		E('save-button').disabled = (cmd=="");	
+	}
+}
+
+function show_client_conf()
+{
+	var i;
+	var ok = 1;
+	var cmd = "";
+	//var fom = E('_fom');
+	var fom;
+	//var data_changed = 0;
+	var if_mode = 0;
+	var ssid_mode = 0;
+
+	if (station_role == 1)
+		fom = E('role_ap'); 
+	else if (station_role == 2)
+		fom = E('role_client');
+	else
+		return -1;
+	
+	E('save-button').disabled = true;
+
+	// select
+	var auth_type = E('_wlan0_sta_auth_type').value; 
+	var ssid = E('_wlan0_sta_ssid').value;
+	// visibility, checkbox 
+	var encrypt = E('_wlan0_sta_encrypt').checked ;
+	var encrypt_type = E('_wlan0_sta_encrypt_type').value;
+
+	var wep_key_id = E('_wlan0_sta_wep_key_id').value;
+	var wep_key_len_5alpha = E('_wlan0_sta_wep_key_len_5alpha').value;
+	var wep_key_len_13alpha = E('_wlan0_sta_wep_key_len_13alpha').value;
+	var wep_key = E('_wlan0_sta_wep_key').value;
+
+	var security_ie = E('_wlan0_sta_security_ie').value;
+	var psk_type = E('_wlan0_sta_psk_type').value;
+	var psk = E('_wlan0_sta_psk').value;
+
+	var auth_type_changed = ((auth_type != wlan0_config.sta_auth_type) ? true:false);
+	var ssid_changed = ((ssid != wlan0_config.sta_ssid) ? true:false);
+	var encrypt_changed = ((!encrypt != !wlan0_config.sta_encrypt) ? true:false);
+
+	var wep_key_id_changed = ((wep_key_id != wlan0_config.sta_wep_key_id) ? true:false);	
+	var wep_key_changed = ((wep_key != wlan0_config.sta_wep_key) ? true:false);
+
+	var psk_type_changed = ((psk_type != wlan0_config.sta_psk_type) ? true:false); 
+	var psk_changed = ((psk != wlan0_config.psk) ? true:false);
+
+	/* verify */
+	//alert("sta ssid_changed " + ssid_changed);
+
+	/* blank */
+	if (!_v_f_blank_text(E('_wlan0_sta_ssid'), 0)) {
+		//alert("SSID can't have spaces !");
+		return -1;
+	}
+
+	/* not blank , not null */
+	if (ssid != '' && (v_f_length_wifi(E('_wlan0_sta_ssid'), 0, 1, 32) == 0))
+		return -1;
+
+	if (ssid_changed) {
+		if (ssid == '') {
+			return -1;
+		} else {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += ("client-mode ssid " + ssid + "\n");
+		}
+	}
+
+	if (auth_type_changed) {
+		if (auth_type == 1) {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "client-mode authentication-method open \n";
+		} else if (auth_type == 2) {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "client-mode authentication-method shared \n";
+		}
+	}
+	
+	//alert("sta encrypt_changed " + encrypt_changed);
+	// test 
+	if (encrypt) {
+		/* Can't be null */	
+		if (v_f_text(E('_wlan0_sta_ssid'), 0, 1, 32) == 0)
+				return -1;
+	}
+
+	if (encrypt_changed) {
+		if (encrypt) {
+			if (encrypt_type == '1') {
+				if (wep_key == '') {
+					return -1;
+				} else {
+					if (wep_key_len_5alpha == '1') {
+						if (v_f_text_wifi(E('_wlan0_sta_wep_key'), 0, 5, 5) == 0)
+							return -1;
+					}
+					if (wep_key_len_5alpha == '2') {
+						if (_v_f_hex(E('_wlan0_sta_wep_key'), 0) == 0)
+							return -1; 
+						if (v_f_text_wifi(E('_wlan0_sta_wep_key'), 0, 10, 10) == 0)
+							return -1;
+					}
+				} 
+				
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += ("client-mode cipher-suite wep40 key-id " + wep_key_id + 
+						" key " + wep_key + "\n " );
+			} else if (encrypt_type == '2') {
+				if (wep_key == '') {
+					return -1;
+				} else {
+					if (wep_key_len_13alpha == '1') {
+						if (v_f_text_wifi(E('_wlan0_sta_wep_key'), 0, 13, 13) == 0)
+							return -1;
+					}
+					if (wep_key_len_13alpha == '2') {
+						if (_v_f_hex(E('_wlan0_sta_wep_key'), 0) == 0)
+							return -1; 
+						if (v_f_text_wifi(E('_wlan0_sta_wep_key'), 0, 26, 26) == 0)
+							return -1;
+					}
+				} 
+								
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += ("client-mode cipher-suite wep104 key-id " + wep_key_id + 
+						" key " + wep_key + " \n ");
+			} else if (encrypt_type == '3') {
+				if (psk == '')
+					return -1;
+				if (psk_type == '1') {
+					if (v_f_length(E('_wlan0_sta_psk'), 0, 8, 63) == 0) 
+						return -1;
+				} else if (psk_type == '2') {
+					if (v_f_length(E('_wlan0_psk'), 0, 64, 64) == 0) 
+						return -1;
+				}
+
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += 	("client-mode cipher-suite tkip  key " + psk + "\n");
+			
+			} else if (encrypt_type == '4') {
+				if (psk == '')
+					return -1;
+				if (psk_type == '1') {
+					if (v_f_length(E('_wlan0_sta_psk'), 0, 8, 63) == 0) 
+						return -1;
+				} else if (psk_type == '2') {
+					if (v_f_length(E('_wlan0_psk'), 0, 64, 64) == 0) 
+						return -1;
+				}
+
+				cmd += "!\n";
+				cmd += "interface dot11radio 1\n";
+				cmd += ("client-mode cipher-suite ccmp key " + psk + "\n");
+  			}
+		} else {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "no client-mode cipher-suite\n";
+		}
+	} 
+
+	//alert("station_role " + station_role);
+	if (station_role != wlan0_config.station_role) {
+		if (station_role == 1) {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "station-role ap\n";
+		} else if  (station_role == 2) {
+			cmd += "!\n";
+			cmd += "interface dot11radio 1\n";
+			cmd += "station-role workgroup-bridge\n";
+		}
+	}
+
+ 	//test
+	//alert("sta cmd=" + cmd);
+
+	if (user_info.priv < admin_priv) {
+		elem.display('save-button', 'cancel-button', false);
+	}else {
+		elem.display('save-button', 'cancel-button', true);
+		fom._web_cmd.value = cmd;
+		E('save-button').disabled = (cmd=="");	
+	}
+}
+
+function verifyFields(focused, quiet)
+{
+	var i;
+	var ok = 1;
+	var cmd = "";
+	//var fom = E('_fom');
+	var fom;
+	//var data_changed = 0;
+
+	if (station_role == 1)
+		fom = E('role_ap'); 
+	else if (station_role == 2)
+		fom = E('role_client');
+	else
+		return -1;
+	
+	E('save-button').disabled = true;
+
+	// select
+	var auth_type = E('_wlan0_auth_type').value; 
+	var ssid = E('_wlan0_ssid').value;
+	// visibility, checkbox 
+	var encrypt = E('_wlan0_encrypt').checked ;
+	var encrypt_type = E('_wlan0_encrypt_type').value;
+
+	var wep_key_id = E('_wlan0_wep_key_id').value;
+	var wep_key_len_5alpha = E('_wlan0_wep_key_len_5alpha').value;
+	var wep_key_len_13alpha = E('_wlan0_wep_key_len_13alpha').value;
+	var wep_key = E('_wlan0_wep_key').value;
+
+	var security_ie = E('_wlan0_security_ie').value;
+	var psk_type = E('_wlan0_psk_type').value;
+	var psk = E('_wlan0_psk').value;
+
+	var radio_mode = E('_wlan0_radio_mode').value; 
+	var channel = E('_wlan0_channel').value;
+	var tx_power = E('_wlan0_tx_power').value;
+
+	var ssid_changed = ((ssid != wlan0_config.ssid) ? true:false);
+	var encrypt_changed = ((!encrypt != !wlan0_config.encrypt) ? true:false);
+
+	var wep_key_id_changed = ((wep_key_id != wlan0_config.wep_key_id) ? true:false);	
+	var wep_key_changed = ((wep_key != wlan0_config.wep_key) ? true:false);
+
+	var psk_type_changed = ((psk_type != wlan0_config.psk_type) ? true:false); 
+	var psk_changed = ((psk != wlan0_config.psk) ? true:false);
+
+	var radio_mode_changed = ((radio_mode != wlan0_config.radio_mode) ? true:false);
+	var channel_changed = ((channel != wlan0_config.channel) ? true:false);
+	var tx_power_changed = ((tx_power != wlan0_config.tx_power) ? true:false);
+
+	/* display */
+	if (station_role == 1) {
+		ap_display();
+	} else if (station_role == 2) {
+		//alert("client display");
+		client_display();
+	}
+
+	if (station_role == 1) {
+		show_ap_conf(quiet); 
+	} else if (station_role == 2) {
+		show_client_conf(quiet);
+	}
+	return ok;	
+
+}
+
+function earlyInit()
+{
+	wlanInit();
+	/* cookie */
+
+/*	
+	if((cookie.get('wlan_advanced')) == null) {
+		cookie.set('wlan_advanced', 0);
+	}
+*/
+	verifyFields(null, true);
+}
+
+function init()
+{
+	if((cookie.get('autosave')) == null){
+		cookie.set('autosave', 1);
+	}
+}
+
+function save()
+{
+	var fom;
+
+	if (!verifyFields(null, false)) return;
+
+	if (station_role == 1)
+		fom = E('role_ap'); 
+	else if (station_role == 2)
+		fom = E('role_client');
+	else
+		alert("Error: station role " + station_role);
+
+	/* test */
+	//alert(fom._web_cmd.value);
+	//return;
+
+
+/*	if((E('_fom')._web_cmd.value != '')&&(cookie.get('autosave') == 1)){
+		E('_fom')._web_cmd.value += "!"+"\n"+"copy running-config startup-config"+"\n";	
+	}*/
+	if((fom._web_cmd.value != '')&&(cookie.get('autosave') == 1)){
+		fom._web_cmd.value += "!"+"\n"+"copy running-config startup-config"+"\n";	
+	}
+
+	form.submit(fom, 1);
+}
+
+</script>
+
+</head>
+<body>
+
+<script type='text/javascript'>
+if (ih_sysinfo.model_name == 'IR816P') {
+W(ui.wlan_station_role + ":" + "<br />");
+W("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+W("<input type='radio' name='stationrole' id= 'radio_ap' " +
+	"onclick='check(this.value)' value='AP' />AP<br />");
+W("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+W("<input type='radio' name='stationrole' id= 'radio_client' " +
+	"onclick='check(this.value)' value='Client' hidden='true' /><br />");
+} else {
+W(ui.wlan_station_role + ":" + "<br />");
+W("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+W("<input type='radio' name='stationrole' id= 'radio_ap' " +
+	"onclick='check(this.value)' value='AP' />AP<br />");
+W("&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp");
+W("<input type='radio' name='stationrole' id= 'radio_client' " +
+	"onclick='check(this.value)' value='Client' />Client<br />");
+}
+
+</script>
+
+<br /> <br /> 
+
+<!-- AP -->
+<div>
+<form id='role_ap' method='post' action='apply.cgi'>
+<input type='hidden' name='_web_cmd' value=''>
+
+<div class='section'>
+<script type='text/javascript'>
+
+createFieldTable('', 
+	[{ title: ui.wlan_auth_type, name: 'wlan0_auth_type', type: 'select', options: wlan_auth_type_list,
+	  value: wlan0_config.auth_type},
+	{ title: ui.ap_ssid, name: 'wlan0_ssid', type: 'text', maxlen: 32, size: 32, value: wlan0_config.ssid },
+
+	{ title: ui.wlan_encryption, name: 'wlan0_encrypt', type: 'checkbox', value: wlan0_config.encrypt=='1'},
+
+	{ title: ui.wlan_encryption_type, name: 'wlan0_encrypt_type', type: 'select', options: wlan_encrypt_type_list,
+	  value: wlan0_config.encrypt_type},
+	{ title: ui.wlan_encryption_type, name: 'wlan0_wep_encrypt_type', type: 'select', options: wlan_wep_encrypt_type_list,
+	  value: wlan0_config.encrypt_type},
+	/* wep */
+	{ title: ui.wlan_wep_key_id, indent: 4, name: 'wlan0_wep_key_id', type: 'select', options: wlan_wep_key_id_list, 
+	  value: wlan0_config.wep_key_id },
+/*	{ title: ui.wlan_wep_key_len, indent: 4, name: 'wlan0_wep_key_len', type: 'text', maxlen: 2, size: 17, 
+	  value: wlan0_config.wep_key_len }, */
+	{ title: ui.wlan_wep_key_len, indent: 4, name: 'wlan0_wep_key_len_5alpha', type: 'select', 
+	  options: wep_key_len_5alpha_list, value: wlan0_config.wep40_key_type },
+	{ title: ui.wlan_wep_key_len, indent: 4, name: 'wlan0_wep_key_len_13alpha', type: 'select', 
+	  options: wep_key_len_13alpha_list, value: wlan0_config.wep104_key_type },
+/*	{ title: ui.wlan_wep_key_len, indent: 4, name: 'wlan0_wep_key_len_16alpha', type: 'select', 
+	  options: wep_key_len_16alpha_list, value: 1 },*/
+ 
+	{ title: ui.wlan_wep_key, indent: 4, name: 'wlan0_wep_key', type: 'text', maxlen: 64, size: 64, 
+	  value: wlan0_config.wep_key },
+	/* TKIP, AES-CCMP */
+	{ title: ui.wlan_security_ie, indent: 4, name: 'wlan0_security_ie', type: 'select', options: wlan_security_ie_list,
+	  value: wlan0_config.security_ie },
+	{ title: ui.wlan_psk_type, indent: 4, name: 'wlan0_psk_type', type: 'select', options: wlan_psk_type_list, 
+	  value: wlan0_config.psk_key_type },
+	{ title: ui.wlan_psk, indent: 4, name: 'wlan0_psk', type: 'text', maxlen: 64, size: 64, 
+	  value: wlan0_config.psk_key},
+	/* radio */
+	{title: ui.wlan_radio_mode, indent: 4, name: 'wlan0_radio_mode', type: 'select', options: wlan_radio_mode_list, 
+	  value: wlan0_config.radio_mode},
+	{title: ui.wlan_channel, indent: 4, name: 'wlan0_channel', type: 'select', options: wlan_channel_list,  
+	  value: wlan0_config.channel},
+	{title: ui.wlan_tx_power, indent: 4, name: 'wlan0_tx_power', type: 'select', options: wlan_tx_power_list,  
+	  value: wlan0_config.tx_power},
+	{ title: ui.wlan_maxsta, indent: 4, name: 'wlan0_maxsta', type: 'text', maxlen: 3, size: 16, 
+	  value: wlan0_config.max_sta_num }
+]
+);
+
+</script>
+</div>
+
+</form>
+</div>
+<!--  AP end -->
+
+<!-- Client -->
+<div>
+<form id='role_client' method='post' action='apply.cgi'>
+<input type='hidden' name='_web_cmd' value=''>
+
+<div class='section'>
+<script type='text/javascript'>
+createFieldTable('', 
+	[{ title: ui.wlan_auth_type, name: 'wlan0_sta_auth_type', type: 'select', options: wlan_auth_type_list,
+	  value: wlan0_config.sta_auth_type},
+	{ title: ui.ap_ssid, name: 'wlan0_sta_ssid', type: 'text', maxlen: 32, size: 32, value: wlan0_config.sta_ssid },
+	{ title: ui.wlan_encryption, name: 'wlan0_sta_encrypt', type: 'checkbox', value: wlan0_config.sta_encrypt=='1'},
+	{ title: ui.wlan_encryption_type, name: 'wlan0_sta_encrypt_type', type: 'select', options: wlan_encrypt_type_list,
+	  value: wlan0_config.sta_encrypt_type},
+	/* wep */
+	{ title: ui.wlan_wep_key_id, indent: 4, name: 'wlan0_sta_wep_key_id', type: 'select', options: wlan_wep_key_id_list, 
+	  value: wlan0_config.sta_wep_key_id },
+	{ title: ui.wlan_wep_key_len, indent: 4, name: 'wlan0_sta_wep_key_len_5alpha', type: 'select', 
+	  options: wep_key_len_5alpha_list, value: wlan0_config.sta_wep40_key_type },
+	{ title: ui.wlan_wep_key_len, indent: 4, name: 'wlan0_sta_wep_key_len_13alpha', type: 'select', 
+	  options: wep_key_len_13alpha_list, value: wlan0_config.sta_wep104_key_type },
+	{ title: ui.wlan_wep_key, indent: 4, name: 'wlan0_sta_wep_key', type: 'text', maxlen: 64, size: 64, 
+	  value: wlan0_config.sta_wep_key },
+	/* TKIP, AES-CCMP */
+	{ title: ui.wlan_security_ie, indent: 4, name: 'wlan0_sta_security_ie', type: 'select', options: wlan_security_ie_list,
+	  value: wlan0_config.sta_security_ie },
+	{ title: ui.wlan_psk_type, indent: 4, name: 'wlan0_sta_psk_type', type: 'select', options: wlan_psk_type_list, 
+	  value: wlan0_config.sta_psk_key_type },
+	{ title: ui.wlan_psk, indent: 4, name: 'wlan0_sta_psk', type: 'text', maxlen: 64, size: 64, 
+	  value: wlan0_config.sta_psk_key}
+	]
+);
+
+
+
+</script>
+</div>
+</form>
+</div>
+
+<!-- Client end -->
+
+<br /><br />
+<script type='text/javascript'>
+if(cookie.get('autosave') == 1)
+	ui.aply=ui.aply_save;
+genStdFooter("");
+
+</script>
+
+<!-- Client Button -->
+<div>
+<form id='role_client_connect_button' method='post' action='apply.cgi'>
+<input type='hidden' name='_web_cmd' value=''>
+
+<div class='section'>
+
+<br /><br /><br />
+<script type='text/javascript'>
+
+genConnectButton();
+
+</script>
+
+</div>
+</form>
+</div>
+<br /><br /><br /><br /><br /><br />
+<script type='text/javascript'>
+
+//genConnectButton();
+
+</script>
+
+<!-- Client Button end -->
+
+
+<script type='text/javascript'>earlyInit()</script>
+
+
+</body>
+</html>

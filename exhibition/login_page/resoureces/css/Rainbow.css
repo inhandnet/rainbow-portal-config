@@ -1,0 +1,116 @@
+body{
+    font-family:Helvetica;
+}
+div.rainbow-content-wrapper{
+    width: 500px;
+    margin:0px auto;
+    border-radius: 4px;
+}
+@media (min-width:700px){
+    .rainbow-content-wrapper li{
+        width: 400px;
+    }
+    button#rainbow_get_user_password{
+        position: relative;
+        top: -2px;
+        left:5px;
+        width:27%;
+        font-size: 14px;
+    }
+}
+@media (max-width: 700px){
+    .rainbow-content-wrapper li{
+        width:100%
+    }
+    div.rainbow-content-wrapper{
+        width: 100%;
+    }
+    button#rainbow_get_user_password{
+        position: relative;
+        top: -2px;
+        left:5px;
+        width:27%;
+        font-size: 12px;
+    }
+}
+@media (max-width:368px){
+    button#rainbow_get_user_password{
+        position: relative;
+        top: -2px;
+        left:5px;
+        width:90px;
+        font-size: 12px;
+    }
+    .rainbow-content-wrapper li{
+        width:337px
+    }
+}
+.rainbow-content-wrapper ul{
+    list-style: none;
+    margin-top: 30px;
+    padding: 0px;
+}
+.rainbow-content-wrapper #one_click,.rainbow-content-wrapper #one_click_bak{
+    height:25px;
+    float: right;
+    margin-right: 13px;
+    font-size: 12px;
+}
+.rainbow-content-wrapper button{
+    display: inline-block;
+    cursor: pointer;
+    height: 42px;
+    border-radius: 4px;
+    outline: none;
+    border-color: rgb(51,117,248);
+    background-color: rgb(51,117,248);
+    color: rgb(255,255,255);
+    font-weight: bold;
+}
+.rainbow-content-wrapper input,.rainbow-content-wrapper label,.rainbow-content-wrapper p{
+    font-size: 16px;
+}
+.rainbow-content-wrapper img{
+    cursor: pointer;
+}
+.rainbow-content-wrapper .rainbow-user-info{
+    padding: 0px;
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    outline: none;
+    /*width: 200px;*/
+    width: 100%;
+    height:40px
+}
+.rainbow-content-wrapper .rainbow-user-info:focus{
+    -webkit-box-shadow:1px 1px 10px rgba(51,117,248,0.75);
+    box-shadow:1px 1px 10px rgba(51,117,248,0.75);
+    border:1px solid rgb(51,117,248);
+}
+.rainbow-content-wrapper .rainbow-code-input{
+    width:70%;
+    height: 40px;
+}
+.rainbow-content-wrapper .rainbow-line-for-sns-count{
+    height:100px
+}
+button#rainbow_loginBtn,button#rainbow_loginBtn_bak{
+    width:100%;
+    height: 40px;
+    font-size: 16px;
+}
+button#one_click_bak,button#rainbow_loginBtn_bak{
+    background-color: rgb(222,222,222);
+    border-color:rgb(222,222,222);
+    border: none;
+}
+button.rainbow_get_user_password{
+    background-color:rgb(222,222,222);
+    border: none;
+    color:rgb(51,117,248);
+}
+.rainbow-content-wrapper .rainbow_error_tips{
+    color:rgb(246,95,0);
+    font-size: 14px;
+}

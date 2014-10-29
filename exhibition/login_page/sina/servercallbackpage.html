@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    var cloud=new Object();
+    cloud.inPortalApiHost="http://api.m.inhand.com.cn:5280";
+    cloud.afterLoginSucessPage="http://www.baidu.com";
+    cloud.sinaCallBackPage="http://c2.inhandnetworks.com/login_page/sina/servercallbackpage.html";
+    //回调函数
+    function getSinaToken_callback(data){
+        //获取sinaToken后的回调函数，在此设置跳转,传递数据以及错误提示
+        console.log(data);
+        if(data.error_code){
+            alert("Failed");
+        }else{
+            window.location.href=cloud.afterLoginSucessPage;
+        }
+    }
+</script>
+<script type="text/javascript">
+    var uri=window.location.search;
+    var prenum=uri.indexOf("=");
+    var authorizationCode=uri.substring(prenum+1);
+    //序列化查询参数
+    function formatData(uri,jsonObj,callbackName){
+        var urlParams="";
+        for(i in jsonObj){
+            urlParams=urlParams+i+"="+encodeURIComponent(jsonObj[i])+"&";
+        }
+        urlParams=urlParams+"call_back="+callbackName;
+        return uri+"?"+urlParams;
+    };
+    console.log(authorizationCode);
+    var scriptELe=document.createElement("script");
+    scriptELe.type="text/javascript";
+    var uri=cloud.inPortalApiHost+"/api/gateway/validate_code";
+    var jsonObj={
+        "grant_type":"authorization_code",
+        "as_type":3,
+        "code":authorizationCode,
+        "redirect_url":cloud.sinaCallBackPage
+    };
+    var url=formatData(uri,jsonObj,"getSinaToken_callback");
+    scriptELe.src=url;
+    document.body.appendChild(scriptELe);
+</script>
+</body>
+</html>

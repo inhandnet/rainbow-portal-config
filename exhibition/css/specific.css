@@ -1,0 +1,83 @@
+/*.lead{*/
+    /*line-height: 3.6!important;*/
+/*}*/
+body{
+    color: #ffffff;
+    background: url("../images/bg.png")  no-repeat;
+    background-size: cover;
+    -moz-moz-background-size: cover;
+    -ms-moz-background-size:cover;
+    -o-moz-background-size:cover;
+    moz-background-size:cover;
+    -webkit-background-size: cover;
+    -ms-background-size:cover;
+}
+.img-center{
+    margin: 0px auto;
+}
+.senior-row{
+    margin-top: 10px!important;
+    /*width: 500px;*/
+}
+.my-boder{
+    /*border: 1px solid #7F7F7F;*/
+    border-radius: 0.5em;
+    background-color: rgba(255,255,255,0.1);
+}
+.my-img-padding{
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+@media screen and (max-width: 500px) {
+    .my-font-size{
+        font-size: 10px;
+    }
+    .my-margin-top{
+        margin-top: 3em;
+    }
+    .wifi{
+        height:135px;
+    }
+}
+@media screen and (min-width: 600px){
+    .my-font-size{
+        font-size: 16px;
+    }
+    .my-margin-top{
+        margin-top: 8em;
+    }
+    .wifi{
+        height:200px;
+    }
+}
+
+.my-boder-left{
+    border-right: 0;
+    border-top:0;
+    border-bottom: 0;
+}
+.my-cell-position-negetive{
+    left: -5px;
+}
+.two-clicked-item{
+    margin-top: 20px;
+}
+.wifi-png-small{
+    margin-top: 13px;
+}
+.footer-des{
+    padding-top: 20px;
+}
+hr{
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+.cooperator{
+    margin-top: 10px;
+}
+.specific{
+    padding-bottom: 25px;
+}
+a{
+    color: #ffffff;
+}

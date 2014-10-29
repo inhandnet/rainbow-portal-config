@@ -1,0 +1,178 @@
+<% pagehead(menu.status_wlan) %>
+
+<script type="text/javascript" src="status-wlan0.jsx"></script>
+
+<script type='text/javascript'>
+
+
+var ref = new webRefresh('status-wlan0.jsx', '', 0, 'status_wlan0_refresh');
+var mode=wlan_mode[0];
+
+ref.refresh = function(text)
+{
+	try {
+		eval(text);
+	}
+	catch (ex) {
+	}
+	show_wlan();
+	show_networks();
+}
+
+function formatTime(second) {
+    var time = parseFloat(second); 
+    var data = "";
+    
+    if (null!= time &&""!= time) {
+	     var day = parseInt(Math.floor(time / 86400));  
+   	     var hour = Math.floor(parseInt(Math.floor(time/3600)) - parseInt(Math.floor(time/86400)*24));  
+   	     var minute = Math.floor(parseInt(Math.floor(time/60)) - parseInt(Math.floor(time/3600)*60));  
+   	     var second = Math.floor(time - parseInt(Math.floor(time/60)*60)); 
+	     
+	     if(day <= 1) data += day + " day, ";
+	     else if(day >= 2) data += day + " days, ";
+	     else data += "0 day, ";
+	     
+   	     if ((hour > 0)&&(hour <= 9)) data += "0" + hour + ":";
+   	     else if (hour >= 10) data += hour + ":";
+	     else data += "00:"
+	     
+  	     if ((minute > 0)&&(minute <= 9)) data += "0" + minute + ":";  
+	     else if(minute >= 10) data += minute + ":";
+	     else data += "00:"
+	     
+  	     if ((second > 0)&&(second <= 9)) data += "0" + second;  
+  	     else if (second >= 10) data += second;  
+	     else data += "00";
+    }else{  
+        data = "";  
+    }  
+    return data;
+}
+
+function c(id, htm)
+{
+	E(id).cells[1].innerHTML = htm;
+}
+
+function show_wlan()
+{
+	if (mode == "sta"){
+		c('station_role', ui.station_role_sta);
+
+		c('mac_addr', sta_info.mac_addr);
+
+		c('ssid', sta_info.ssid);
+		c('bssid', sta_info.bssid);
+
+		if (sta_info.state == 0)
+			c('state', ui.sta_disconnected);
+		else if (sta_info.state == 1)
+			c('state', ui.sta_connected);
+		else
+			c('state', ui.sta_connected);
+
+		c('channel', sta_info.channel);
+	} else if (mode == "ap") {
+		c('station_role', ui.station_role_ap);
+
+		c('ssid', ap_info.ssid);
+		if (ap_info.auth_method == 1)
+			c('auth_method', ui.ap_auth_open);
+		else if (ap_info.auth_method == 2)
+			c('auth_method', ui.ap_auth_shared);
+		else 
+			c('auth_method', '');
+		
+		c('max_num_sta', ap_info.max_num_sta);
+
+		c('mac_addr', ap_info.mac_addr);
+		c('radio_type', ap_info.radio_type);
+		c('channel', ap_info.channel);
+		c('tx_power', ap_info.tx_power);
+	}
+}
+
+function show_networks()
+{
+	//wlan_status_list=[[0,ui.disconnected],[1,ui.connected]];
+
+	c('wlan0_ip', wlan0_if.ip);
+	c('wlan0_netmask', wlan0_if.netmask);
+	c('wlan0_gateway', wlan0_if.gateway);
+	c('wlan0_dns', wlan0_if.dns);
+	c('wlan0_mtu', wlan0_if.mtu);
+	/*time = formatTime();
+	c('wlan0_uptime', time);*/
+
+}
+
+function earlyInit()
+{
+	show_wlan();
+	show_networks();
+}
+
+function init()
+{
+	ref.initPage(3000, 0);
+}
+
+</script>
+
+</head>
+<body onload='init()'>
+<form id='_fom' method='post' action=''>
+
+<script type='text/javascript'>
+W("<div class='section-title' id='wlan-title'>" + menu.status_wlan + "</div>");
+W("<div class='section' id='wlan-section'>");
+
+if (mode == "ap") {
+	createFieldTable('', [
+		{ title: ui.station_role, rid: 'station_role'},
+		{ title: ui.ap_ssid, rid: 'ssid'},
+		{ title: ui.ap_auth_method, rid: 'auth_method'},
+		{ title: ui.ap_max_num_sta, rid: 'max_num_sta'},
+		{ title: ui.ap_mac_addr, rid: 'mac_addr'},
+		{ title: ui.ap_radio_type, rid: 'radio_type'},
+		{ title: ui.ap_channel, rid: 'channel'},
+		{ title: ui.ap_tx_power, rid: 'tx_power'}
+	]);
+} else if (mode == "sta"){
+	createFieldTable('', [
+		{ title: ui.station_role, rid: 'station_role'},
+		{ title: ui.sta_mac_addr, rid: 'mac_addr'},
+		{ title: ui.sta_ssid, rid: 'ssid'},
+		{ title: ui.sta_bssid, rid: 'bssid'},
+		{ title: ui.sta_state, rid: 'state'},
+		{ title: ui.sta_channel, rid: 'channel'}
+	]);
+} else {
+	
+}	
+W("</div>");	
+
+W("<div class='section-title' id='networks-title'>" + menu.status_networks + "</div>");
+W("<div class='section' id='networks-section'>");
+createFieldTable('', [
+	{ title: ui.ip, rid: 'wlan0_ip' },
+	{ title: ui.netmask, rid: 'wlan0_netmask' },
+	{ title: ui.gateway, rid: 'wlan0_gateway' },
+	{ title: ui.mtu, rid: 'wlan0_mtu'},
+	{ title: ui.dns, rid: 'wlan0_dns' }
+	//{ title: ui.conn_time, rid: 'wlan0_uptime' }
+]);
+W("</div>");
+
+</script>
+</div>
+
+<div id='footer'>
+	<script type='text/javascript'>genStdRefresh(1,0,'ref.toggle()');</script>
+</div>
+</form>
+
+<script type='text/javascript'>earlyInit();</script>
+</body>
+</html>

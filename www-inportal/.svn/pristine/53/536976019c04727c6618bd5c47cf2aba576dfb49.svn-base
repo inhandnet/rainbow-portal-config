@@ -1,0 +1,4 @@
+stats = 
+	{time: '<% time(); %>',
+	 ostime: ''
+	 };
