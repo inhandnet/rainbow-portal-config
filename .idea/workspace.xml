@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c8ffcd14-d229-4735-9a9d-6b130f34a252" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="newface.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,7 +55,7 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="17" selection-start="1978" selection-end="1978" vertical-scroll-proportion="0.8766234" vertical-offset="157" max-vertical-offset="833">
+            <state line="39" column="67" selection-start="1935" selection-end="1935" vertical-scroll-proportion="0.84902596" vertical-offset="140" max-vertical-offset="799">
               <folding />
             </state>
           </provider>
@@ -492,7 +491,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="17" selection-start="1978" selection-end="1978" vertical-scroll-proportion="0.8766234" vertical-offset="157" max-vertical-offset="833">
+        <state line="39" column="67" selection-start="1935" selection-end="1935" vertical-scroll-proportion="0.84902596" vertical-offset="140" max-vertical-offset="799">
           <folding />
         </state>
       </provider>
