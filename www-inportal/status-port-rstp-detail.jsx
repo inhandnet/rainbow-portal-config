@@ -1,1 +1,0 @@
-<% web_rstp_port()%>
