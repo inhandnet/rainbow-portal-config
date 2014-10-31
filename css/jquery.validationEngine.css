@@ -42,7 +42,7 @@
 
  .formError .formErrorContent {
 	width: 100%;
-	background: rgb(236, 160, 29);
+	background: #8D5353;
 	position:relative;
 	color: #fff;
 	min-width: 12px;
@@ -76,7 +76,7 @@
 }
 
 .blackPopup .formErrorContent {
-	background:rgb(236, 160, 29);
+	background:#8D5353;
 	color: #FFF;
 }
 
@@ -108,7 +108,7 @@ body.rtl .formError .formErrorArrow {
 	-o-box-shadow: 0 2px 3px #444;
 	font-size: 0px;
 	height: 1px;
-	background: rgb(236, 160, 29);
+	background: #8F5959;
 	margin: 0 auto;
 	line-height: 0;
 	font-size: 0;
@@ -127,7 +127,7 @@ body.rtl .formError .formErrorArrow {
 }
 
 .blackPopup .formErrorArrow div {
-	background: rgb(236, 160, 29);
+	background: #8D5353;
 	color: #FFF;
 }
 
@@ -184,15 +184,15 @@ body.rtl .formError .formErrorArrow {
 .formError{
 	z-index:20000;
 }
-div.formError div.formErrorContent { padding: 4px 10px 4px 10px; width: 100%; background: rgb(236, 160, 29); position:relative; color: #ffffff; min-width: 150px; line-height:17px;font-weight: 700; font-size: 11px; border: 1px solid rgb(236, 160, 29); box-shadow: 1px 1px 5px #666; border-radius: 3px; -moz-border-radius:3px; /* Old Firefox */}
-div.formError div.formErrorArrow div { border-left: 2px solid rgb(236, 160, 29); border-right: 2px solid rgb(236, 160, 29); box-shadow: 0 2px 3px #666; -moz-box-shadow: 0 2px 3px #666; -webkit-box-shadow: 0 2px 3px #666; -o-box-shadow: 0 2px 3px #666; font-size: 0px; height: 1px; background: rgb(236, 160, 29); margin: 0 auto; line-height: 0; font-size: 0; display: block;}
-.formError .formErrorArrow .line10 { width: 15px; border: none; }
-.formError .formErrorArrow .line9 { width: 13px; border: none; }
-.formError .formErrorArrow .line8 { width: 11px; }
-.formError .formErrorArrow .line7 { width: 9px; }
-.formError .formErrorArrow .line6 { width: 7px; }
-.formError .formErrorArrow .line5 { width: 5px; }
-.formError .formErrorArrow .line4 { width: 3px; }
-div.formError div.formErrorArrow div.line3 { width: 1px; border-left: 2px solid rgb(236, 160, 29); border-right: 2px solid rgb(236, 160, 29); border-bottom: 0 solid rgb(236, 160, 29); }
-div.formError div.formErrorArrow div.line2 { width: 3px; border: none; background: rgb(236, 160, 29); }
-div.formError div.formErrorArrow div.line1 { width: 1px; border: none; background: rgb(236, 160, 29);}
+div.formError div.formErrorContent { padding: 4px 10px 4px 10px; width: 120px; background: #8D5353; position:relative; color: #ffffff; min-width: 70px; line-height:12px; font-size: 11px; border: 1px solid #8D5353; box-shadow: 1px 1px 5px #666; border-radius: 3px; -moz-border-radius:3px; /* Old Firefox */}
+div.formError div.formErrorArrow div { border-left: 2px solid #8D5353; border-right: 2px solid #8D5353; box-shadow: 0 2px 3px #666; -moz-box-shadow: 0 2px 3px #666; -webkit-box-shadow: 0 2px 3px #666; -o-box-shadow: 0 2px 3px #666; font-size: 0px; height: 1px; background: #8D5353; margin: 0 auto; line-height: 0; font-size: 0; display: block;}
+.formError .formErrorArrow .line10 { width: 15px; border: none;box-sizing: content-box!important; }
+.formError .formErrorArrow .line9 { width: 13px; border: none; box-sizing: content-box!important;}
+.formError .formErrorArrow .line8 { width: 11px; box-sizing: content-box!important;}
+.formError .formErrorArrow .line7 { width: 9px;box-sizing: content-box!important; }
+.formError .formErrorArrow .line6 { width: 7px;box-sizing: content-box!important; }
+.formError .formErrorArrow .line5 { width: 5px;box-sizing: content-box!important; }
+.formError .formErrorArrow .line4 { width: 3px;box-sizing: content-box!important; }
+div.formError div.formErrorArrow div.line3 { width: 1px; border-left: 2px solid #8D5353; border-right: 2px solid #8D5353; border-bottom: 0 solid #8D5353;box-sizing: content-box!important; }
+div.formError div.formErrorArrow div.line2 { width: 3px; border: none; background: #8D5353;box-sizing: content-box!important; }
+div.formError div.formErrorArrow div.line1 { width: 1px; border: none; background: #8D5353;box-sizing: content-box!important;}
