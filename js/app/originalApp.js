@@ -31,10 +31,10 @@ define(function(require){
               }
               var success=obj.success;
               var success_f=function(data,textStatus){
+                  success(data,textStatus);
                   setTimeout(
                       function(){
                           $.unblockUI();
-                          success(data,textStatus);
                       }, 1500)
               };
               var error=obj.error;

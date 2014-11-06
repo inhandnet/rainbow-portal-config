@@ -76,6 +76,8 @@ define(function(require){
         },
         getCurrentConfig:function(){
             var self=this;
+            var date1=new Date();
+            console.log("开始");
             self.ajax({
                 type:"get",
                 url:"js/app/director_1.jsx",
@@ -83,6 +85,8 @@ define(function(require){
                 success:function(data,textStatus){
 //                    data=""
 //                    eval(data);
+                    var date2=new Date();
+                    console.log("请求成功，经过"+(date2.getTime()-date1.getTime())/1000+"s");
                     static_route_config.each(function(one){
                         if(one[0]=="0.0.0.0"&&one[1]=="0.0.0.0"){
                             self.wanPort=one[2];
@@ -122,6 +126,8 @@ define(function(require){
                     obj.adslConfig=adslConfig;
                     obj.staticIpConfig=staticIpConfig;
                     self.setFormData(obj);
+                    var date3=new Date();
+                    console.log("渲染完毕"+(date3.getTime()-date1.getTime())/1000+"s");
                 }
             })
         },
