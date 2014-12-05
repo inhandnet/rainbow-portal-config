@@ -1,7 +1,7 @@
 define(function(require){
     var html=require("text!partials/mainApp.html");
     var App=require("app/originalApp");
-    require("../../css/mainApp.css");
+    require("text!../../css/mainApp.css");
     var locale=require("tool/locale");
     var validator=require("tool/validator");
     var DirectorOne=require("app/director_1");

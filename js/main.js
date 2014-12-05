@@ -6,7 +6,8 @@ require.config({
     paths:{
         "jquery":"lib/jquery-1.11.1.min",
         "prototype":"lib/prototype",
-        "lang":"../lang"
+        "lang":"../lang",
+        "text":"lib/text"
     },
     shim:{
         "lib/jquery.validationEngine":["jquery"],
