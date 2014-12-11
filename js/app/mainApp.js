@@ -69,29 +69,18 @@ define(function(require){
             self.ajax({
                 url:"js/app/mainApp.jsx",
                 type:"get",
-                //contentType:"application/json",
                 success:function(data,textStatus){
-                    //if(typeof data=="string"){
-                    //    data=JSON.parse(data);
-                    //}
+                    eval(data);
+                    console.log(data);
                     $("#nav-row").find("#user-name").text("admin");
-//                    console.log(data);
                     static_route_config.each(function(one){
                         if(one[0]=="0.0.0.0"&&one[1]=="0.0.0.0"){
                             self.wanPort=one[2];
-                            //self.gateway=one[3];
                         }
                     });
                     var data=self.formatData();
                     self.viewContainer.find("#network-state").text(data.statusComment+"，"+data.wanPort).end()
-                        .find("#network-period").text(data.connectTime).end()
-                        //.find("#network-flow").text(data.network.flow).end()
-                        //.find("#wifi-ssid").text(data.wifi.ssid).end()
-                        //.find("#wifi-devices").text(data.wifi.devices).end()
-                        //.find("#wifi-users").text(/*data.wifi.users*/"admin").end()
-                        //.find("#sync-html").text(data.sync.html).end()
-                        //.find("#sync-scripts").text(data.sync.scripts).end()
-                        //.find("#sync-conf").text(data.sync.conf);
+                        .find("#network-period").text(data.connectTime).end();
                 }
             })
         },

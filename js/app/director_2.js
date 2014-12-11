@@ -94,7 +94,7 @@ define(function(require){
                             processData:false,
                             contentType:"text/plain;charset=utf-8",
                             success:function(data,textStatus){
-                                self.destroySelfAll();
+                                //self.destroySelfAll();
                                 $("#return-to-homepage").trigger("click");
                             },
                             error:function(xhr,err){

@@ -6360,7 +6360,7 @@ xpcIsWindows && (url = url.replace(/\//g, "\\")), fileObj = new FileUtils.File(u
     };
     return text;
 }), define("text!partials/mainApp.html", [], function() {
-    return '<div class="container-fluid my-container-fluid-heihgt">\r\n    <div class="row portal-height">\r\n        <div class="col-xs-4 col-sm-8 col-md-7 col-lg-8">\r\n        </div>\r\n        <div class="col-xs-4 col-sm-2 col-md-3 col-lg-2 text-center">\r\n            <span id="config-director" class="my-font-style" data-lang="{text:config_guide+:}"></span>\r\n        </div>\r\n        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">\r\n            <div class="my-float">\r\n                <span id="sennior-config" class="my-font-style" data-lang="{text:sennior_config+:}"></span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class="row my-margin-top">\r\n        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-lg-offset-1">\r\n            <div class="row infomation-div-network-color infomation-div my-row-1 my-border-radius">\r\n                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">\r\n                    <h5 class="my-font-weight" data-lang="{text:network}"></h5>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">\r\n                        </div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:status}"></label>:\r\n                            <span id="network-state"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:duration}"></label>:\r\n                            <span id="network-period"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:flow}"></label>:\r\n                            <span id="network-flow"></span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-lg-offset-1">\r\n            <div class="row infomation-div-wifi-color infomation-div my-row-2 my-border-radius">\r\n                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">\r\n                    <h5 class="my-font-weight" data-lang="{text:wireless}"></h5>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:wifi_spot}"></label>:\r\n                            <span id="wifi-ssid"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:connections}"></label>:\r\n                            <span id="wifi-devices"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:users}"></label>:\r\n                            <span id="wifi-users"></span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-lg-offset-1">\r\n            <div class="row infomation-div-sync-color infomation-div my-row-3 my-border-radius">\r\n                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">\r\n                    <h5 class="my-font-weight" data-lang="{text:content_synchro}"></h5>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:html}"></label>:\r\n                            <span id="sync-html"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:scripts}"></label>:\r\n                            <span id="sync-scripts"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label id="" class="my-own-font-size my-s-margin-top" data-lang="{text:conf}"></label>:\r\n                            <span id="sync-conf"></span>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>'
+    return '<div class="container-fluid my-container-fluid-heihgt">\r\n    <div class="row portal-height">\r\n        <div class="col-xs-4 col-sm-8 col-md-7 col-lg-8">\r\n        </div>\r\n        <div class="col-xs-4 col-sm-2 col-md-3 col-lg-2 text-center">\r\n            <span id="config-director" class="my-font-style" data-lang="{text:config_guide+:}"></span>\r\n        </div>\r\n        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">\r\n            <div class="my-float">\r\n                <a href="../../index.jsp" id="sennior-config" class="my-font-style" data-lang="{text:sennior_config+:}"></a>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class="row my-margin-top">\r\n        <div class="col-xs-12 col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-3 col-lg-offset-5">\r\n            <div class="row infomation-div-network-color infomation-div my-row-1 my-border-radius">\r\n                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">\r\n                    <h5 class="my-font-weight" data-lang="{text:network}"></h5>\r\n                    <div class="row" style="margin-top: 35px">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">\r\n                        </div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:status}"></label>:\r\n                            <span id="network-state"></span>\r\n                        </div>\r\n                    </div>\r\n                    <div class="row">\r\n                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>\r\n                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">\r\n                            <label class="my-own-font-size my-s-margin-top" data-lang="{text:duration}"></label>:\r\n                            <span id="network-period"></span>\r\n                        </div>\r\n                    </div>\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label class="my-own-font-size my-s-margin-top" data-lang="{text:flow}"></label>:-->\r\n                            <!--<span id="network-flow"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-lg-offset-1">-->\r\n            <!--<div class="row infomation-div-wifi-color infomation-div my-row-2 my-border-radius">-->\r\n                <!--<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">-->\r\n                    <!--<h5 class="my-font-weight" data-lang="{text:wireless}"></h5>-->\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label class="my-own-font-size my-s-margin-top" data-lang="{text:wifi_spot}"></label>:-->\r\n                            <!--<span id="wifi-ssid"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label class="my-own-font-size my-s-margin-top" data-lang="{text:connections}"></label>:-->\r\n                            <!--<span id="wifi-devices"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label class="my-own-font-size my-s-margin-top" data-lang="{text:users}"></label>:-->\r\n                            <!--<span id="wifi-users"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                <!--</div>-->\r\n            <!--</div>-->\r\n        <!--</div>-->\r\n        <!--<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 col-lg-offset-1">-->\r\n            <!--<div class="row infomation-div-sync-color infomation-div my-row-3 my-border-radius">-->\r\n                <!--<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">-->\r\n                    <!--<h5 class="my-font-weight" data-lang="{text:content_synchro}"></h5>-->\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label class="my-own-font-size my-s-margin-top" data-lang="{text:html}"></label>:-->\r\n                            <!--<span id="sync-html"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label class="my-own-font-size my-s-margin-top" data-lang="{text:scripts}"></label>:-->\r\n                            <!--<span id="sync-scripts"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                    <!--<div class="row">-->\r\n                        <!--<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>-->\r\n                        <!--<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">-->\r\n                            <!--<label id="" class="my-own-font-size my-s-margin-top" data-lang="{text:conf}"></label>:-->\r\n                            <!--<span id="sync-conf"></span>-->\r\n                        <!--</div>-->\r\n                    <!--</div>-->\r\n                <!--</div>-->\r\n            <!--</div>-->\r\n        <!--</div>-->\r\n    </div>\r\n</div>'
 ;
 }), function() {
     function setup($) {
@@ -6614,7 +6614,7 @@ conf: "conf",
     username: "Username",
     password: "Password",
     dial_numbers: "Dialed Numbers",
-    main_ip: "Main IP",
+    main_ip: "IP Address",
     subnet_mask: "Subnet Mask",
     gateway: "Gateway",
     preferred_domain: "Preferred DNS",
@@ -6635,11 +6635,19 @@ conf: "conf",
     white_mac_4: "White Mac 4",
     white_mac_5: "White Mac 5",
     enter_mac: "Enter Mac",
-    please_wait: "Please Wait..."
+    please_wait: "Please Wait...",
+    connect_internet: "Connect InterNet",
+    manage_platform: "Manage Platform",
+    minutes: "minute(s)",
+    seconds: "second(s)",
+    hours: "hour(s)"
+,
+    days: "day(s)",
+    connected: "connected",
+    disconnected: "disconnected"
 }), define("lang/zh_CN/lang", {
     inportal_description: "InPortal\u667a\u80fdWI-FI\u8def\u7531\u5668",
-    copyright: "\u7248\u6743\u6240\u6709&copy;\u5317\u4eac\u6620\u7ff0\u901a\u7f51\u7edc\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8"
-,
+    copyright: "\u7248\u6743\u6240\u6709&copy;\u5317\u4eac\u6620\u7ff0\u901a\u7f51\u7edc\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8",
     welcome: "\u6b22\u8fce",
     exit: "\u9000\u51fa",
     config_guide: "\u914d\u7f6e\u5411\u5bfc",
@@ -6659,15 +6667,15 @@ conf: "conf",
     return_to_home: "\u8fd4\u56de\u9996\u9875",
     interface_type: "\u63a5\u53e3\u7c7b\u578b",
     apn: "APN",
-    username: "\u7528\u6237\u540d",
+    username
+: "\u7528\u6237\u540d",
     password: "\u5bc6\u7801",
     dial_numbers: "\u62e8\u53f7\u53f7\u7801",
-    main_ip: "\u4e3bIP",
+    main_ip: "IP\u5730\u5740",
     subnet_mask: "\u5b50\u7f51\u63a9\u7801",
     gateway: "\u7f51\u5173",
     preferred_domain: "\u9996\u9009\u57df\u540d\u670d\u52a1\u5668",
-    alternate_domain: "\u5907\u9009\u57df\u540d\u670d\u52a1\u5668"
-,
+    alternate_domain: "\u5907\u9009\u57df\u540d\u670d\u52a1\u5668",
     pre_step: "\u4e0a\u4e00\u6b65",
     next_step: "\u4e0b\u4e00\u6b65",
     demo_mode: "\u6f14\u793a\u6a21\u5f0f",
@@ -6683,15 +6691,23 @@ conf: "conf",
     white_mac_3: "\u767d\u540d\u5355Mac3",
     white_mac_4: "\u767d\u540d\u5355Mac4",
     white_mac_5: "\u767d\u540d\u5355Mac5",
-    enter_mac: "\u8f93\u5165Mac\u5730\u5740",
-    please_wait: "\u6b63\u5728\u5904\u7406..."
+    enter_mac: "\u8f93\u5165Mac\u5730\u5740"
+,
+    please_wait: "\u6b63\u5728\u5904\u7406...",
+    connect_internet: "\u8fde\u63a5\u4e92\u8054\u7f51",
+    manage_platform: "\u7ba1\u7406\u5e73\u53f0",
+    minutes: "\u5206",
+    seconds: "\u79d2",
+    hours: "\u5c0f\u65f6",
+    days: "\u5929",
+    connected: "\u5df2\u8fde\u63a5",
+    disconnected: "\u672a\u8fde\u63a5"
 }), define("tool/locale", [ "require", "lang/en/lang", "lang/zh_CN/lang" ], function(require) {
     var enPackage = require("lang/en/lang"), zhPackage = require("lang/zh_CN/lang"), locale = {
         defaultLanguage: "zh_CN",
         english: enPackage,
         chinese: zhPackage,
-        
-render: function() {
+        render: function() {
             var self = this, langDom = $("[data-lang]");
             self._setInner(langDom);
         },
@@ -6701,7 +6717,8 @@ render: function() {
         },
         get: function(keyStr) {
             var self = this;
-            if (self.defaultLanguage == "zh_CN") return self.chinese[keyStr];
+            if (self.defaultLanguage == "zh_CN") return self
+.chinese[keyStr];
             if (self.defaultLanguage == "en") return self.english[keyStr];
         },
         setLocalStorage: function(langstr) {
@@ -6711,12 +6728,12 @@ render: function() {
         _setInner: function(langDom) {
             var self = this, languagePack;
             self.defaultLanguage = localStorage.getItem("language"), self.defaultLanguage == "zh_CN" ? languagePack = self.chinese : self.defaultLanguage == "en" && (languagePack = self.english), langDom.each(function(one) {
-                var domCur = $(langDom[one]), currentIndex = 
-domCur.attr("data-lang"), lastLg = currentIndex.lastIndexOf("}"), tempStr = currentIndex.slice(1, lastLg), tempArr_1 = tempStr.split(",");
+                var domCur = $(langDom[one]), currentIndex = domCur.attr("data-lang"), lastLg = currentIndex.lastIndexOf("}"), tempStr = currentIndex.slice(1, lastLg), tempArr_1 = tempStr.split(",");
                 tempArr_1.each(function(two) {
                     var smTempArr = two.split(":"), index = smTempArr[0];
                     if (smTempArr[1].indexOf("+") != -1) var xsTempArr = smTempArr[1].split("+");
-                    switch (index) {
+                    
+switch (index) {
                       case "text":
                         var str = "";
                         xsTempArr ? xsTempArr.each(function(one) {
@@ -6727,8 +6744,7 @@ domCur.attr("data-lang"), lastLg = currentIndex.lastIndexOf("}"), tempStr = curr
                         var str = "";
                         xsTempArr ? xsTempArr.each(function(one) {
                             languagePack[one] ? str += languagePack[one] : str += one;
-                        }) : str = 
-languagePack[smTempArr[1]], domCur.attr({
+                        }) : str = languagePack[smTempArr[1]], domCur.attr({
                             placeholder: str
                         });
                     }
@@ -6739,7 +6755,8 @@ languagePack[smTempArr[1]], domCur.attr({
     return locale;
 }), define("app/originalApp", [ "require", "lib/jquery.blockUI", "tool/locale" ], function(require) {
     require("lib/jquery.blockUI");
-    var locale = require("tool/locale"), App = Class.create({
+    var locale = require("tool/locale"
+), App = Class.create({
         initialize: function(options) {
             this.elementId = options.elementId, this.options = options, this.events = options.events, this.viewContainer = $("#" + options.elementId);
         },
@@ -6753,15 +6770,15 @@ languagePack[smTempArr[1]], domCur.attr({
                     "-webkit-border-radius": "10px",
                     "-moz-border-radius": "10px",
                     color: "#fff",
-                    
-width: "20%",
+                    width: "20%",
                     left: "40%"
                 },
                 message: "<div><div class='mask_block table-cell'></div><div class='table-cell'>" + locale.get("please_wait") + "</div></div>"
             });
             var success = obj.success, success_f = function(data, textStatus) {
                 success(data, textStatus), setTimeout(function() {
-                    $.unblockUI();
+                    
+$.unblockUI();
                 }, 1500);
             }, error = obj.error, error_f = function(xhr, err) {
                 setTimeout(function() {
@@ -6780,8 +6797,7 @@ width: "20%",
         },
         fire: function(eventStr) {
             var self = this;
-            
-self.events[eventStr].call(self.events.scope || self);
+            self.events[eventStr].call(self.events.scope || self);
         },
         destroy: function() {
             var self = this;
@@ -6790,7 +6806,7 @@ self.events[eventStr].call(self.events.scope || self);
     });
     return App;
 }), define("text!app/../../css/mainApp.css", [], function() {
-    return '\r\n.my-margin-left-checkbox{\r\n    margin-left:0px !important\r\n}\r\n.portal-height{\r\n    height:69px;\r\n    line-height: 69px;\r\n}\r\n.portal-line-height{\r\n    line-height: 69px;\r\n}\r\n.my-font-color-white{\r\n    color:rgb(255,255,255)\r\n}\r\n.my-font-color-blue{\r\n    color:#0769AD\r\n}\r\na:hover,a:focus{\r\n    color:rgb(255,255,255);\r\n    text-decoration:underline;\r\n    cursor:pointer\r\n}\r\na{\r\n    color:rgb(255,255,255)\r\n}\r\n.infomation-div{\r\n    height: 200px;\r\n    /*width: 320px;*/\r\n}\r\n.infomation-div-network-color{\r\n    background-color: rgb(206,67,31);\r\n    background-image: url("../images/1.png");\r\n    background-repeat: no-repeat;\r\n    background-position-x:10px ;\r\n    background-position-y:35px;\r\n}\r\n.infomation-div-wifi-color{\r\n    background-color: rgb(46,156,28);\r\n    background-image: url("../images/2.png");\r\n    background-repeat: no-repeat;\r\n    background-position-x:10px ;\r\n    background-position-y:35px;\r\n}\r\n.infomation-div-sync-color{\r\n    background-color: rgb(222,157,46);\r\n    background-image: url("../images/3.png");\r\n    background-repeat: no-repeat;\r\n    background-position-x:10px ;\r\n    background-position-y:35px;\r\n}\r\n.my-bg-color{\r\n    /*background-color:#136DC9;*/\r\n    height: 775px;\r\n    background: url("../images/bg.jpg");\r\n    background-size: cover;\r\n    /*margin-bottom: 167px;*/\r\n}\r\n.my-own-font-size{\r\n    font-size:12px\r\n}\r\n.a-underline{\r\n    text-decoration: underline;\r\n}\r\n.my-float{\r\n    float: right;\r\n}\r\n.my-margin-top{\r\n    margin-top:85px\r\n}\r\n.my-font-weight{\r\n    font-weight:700\r\n}\r\n.my-normal-font-weight{\r\n    font-weight:normal;\r\n}\r\n.my-s-margin-top{\r\n    margin-top:15px\r\n}\r\n.my-lable-line-height{\r\n    line-height: 34px;\r\n}\r\n.my-pre-step-next-step-height{\r\n    height:400px;\r\n    position: relative;\r\n}\r\n.down-z-index{\r\n    z-index: -1;\r\n}\r\n.my-table-container-scroll{\r\n    height:225px;\r\n    overflow-y:scroll;\r\n}\r\n.my-table-margin-top{\r\n    margin-top: 12px !important;\r\n}\r\n.my-container-fluid-heihgt{\r\n    height:469px\r\n}\r\n.my-border-radius{\r\n    border-radius: 5px\r\n}\r\n.my-title-img{\r\n    width: 110px;\r\n    height: 80px;\r\n    position: relative;\r\n    top: -19px;\r\n    /*background: url("../images/Logo-InHand.png");*/\r\n    /*background-size: cover;*/\r\n}\r\n.mask_block{\r\n    background-image: url("../images/wait.gif");\r\n    width: 90px;\r\n    height: 90px;\r\n    background-size: cover;\r\n}\r\n.table-cell{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n}\r\n.my-font-style{\r\n    font-size:16px;\r\n    text-decoration: underline;\r\n    cursor: pointer;\r\n}\r\n.footer-margin-top{\r\n    margin-top:40px\r\n}\r\nbutton.adjust-en-ch{\r\n    width: 70px;\r\n}\r\n.addone-margin-left{\r\n    margin-left: -15px;\r\n}\r\n.addone-no-radius{\r\n    border-radius: 0px;\r\n    border-left: 0;\r\n    background-color: #fff !important;\r\n}\r\n.my-input-radius-control{\r\n    border-top-right-radius: 0px;\r\n    border-bottom-right-radius: 0px;\r\n}\r\n.footer-company{\r\n    margin-top: 90px;\r\n}\r\n\r\n@media (max-width: 768px) {\r\n    .lg-font-size{\r\n        display: none;\r\n    }\r\n    .container-wrapper{\r\n        /*background-color: #136DC9;*/\r\n        /*background:url("../images/bg.png") repeat-y ;*/\r\n        color:rgb(255,255,255);\r\n        width: 100%;\r\n        /*padding-bottom: 70px;*/\r\n        margin: 0px auto;\r\n        position: relative;\r\n        top:40px;\r\n        /*border:2px solid #136DC9;*/\r\n        border-radius: 10px;\r\n    }\r\n    .my-pre-step-next-step-position{\r\n        position: relative;\r\n        /*top:350px;*/\r\n        left:30%;\r\n        width:160px\r\n    }\r\n    .addone-no-radius{\r\n        display: none;\r\n    }\r\n    .addone-margin-left{\r\n        margin-left: 0px;\r\n    }\r\n    .my-input-radius-control{\r\n        border-top-right-radius: 4px;\r\n        border-bottom-right-radius: 4px;\r\n    }\r\n    .addone-input-mobile{\r\n        border-top-left-radius: 4px !important;\r\n        border-bottom-left-radius: 4px !important;\r\n        margin-left: 15px;\r\n    }\r\n    .mask_block{\r\n        display: none!important;\r\n    }\r\n}\r\n@media (max-width: 992px) {\r\n    .lg-font-size{\r\n        /*display: none;*/\r\n        font-size: 26px;\r\n    }\r\n    .container-wrapper{\r\n        /*background-color: #136DC9;*/\r\n        /*background:url("../images/bg.png") repeat-y ;*/\r\n        color:rgb(255,255,255);\r\n        width: 100%;\r\n        /*padding-bottom: 70px;*/\r\n        margin: 0px auto;\r\n        position: relative;\r\n        top:40px;\r\n        /*border:2px solid #136DC9;*/\r\n        border-radius: 10px;\r\n    }\r\n    .my-pre-step-next-step-position{\r\n        position: relative;\r\n        /*top:350px;*/\r\n        left:50%;\r\n        width: 160px;\r\n    }\r\n}\r\n@media(min-width:993px ) {\r\n    .lg-font-size{\r\n        /*display: none;*/\r\n        font-size: 26px;\r\n    }\r\n    .my-table-checkbox{\r\n        position: absolute;\r\n        margin-left: 20px !important;\r\n    }\r\n    .my-pre-step-next-step-position{\r\n        position: absolute;\r\n        top:350px;\r\n        left:80%;\r\n        width: 160px;\r\n    }\r\n    .container-wrapper{\r\n        /*background-color: #136DC9;*/\r\n        /*background:url("../images/bg.png") repeat-y ;*/\r\n        color:rgb(255,255,255);\r\n        width: 73%;\r\n        /*padding-bottom: 70px;*/\r\n        margin: 0px auto;\r\n        position: relative;\r\n        top:40px;\r\n        /*border:2px solid #136DC9;*/\r\n        border-radius: 10px;\r\n    }\r\n\r\n}\r\n@media (min-width: 1200px) {\r\n    .lg-font-size{\r\n        /*display: none;*/\r\n        font-size: 40px;\r\n    }\r\n    .my-row-1{\r\n        margin-left: -87px !important;\r\n        margin-right: -7px !important;\r\n    }\r\n    .my-row-2{\r\n        margin-left: -83.5px !important;\r\n        margin-right: -3.5px !important;\r\n    }\r\n    .my-row-3{\r\n        margin-left: -87px !important;\r\n        margin-right: 0px !important;\r\n    }\r\n}\r\n@media(min-width: 1540px) {\r\n    .my-row-1{\r\n        margin-right: 0px !important;\r\n        margin-left: -96px !important;\r\n    }\r\n    .my-row-2{\r\n        margin-left: -96px !important;\r\n        margin-right: 4px !important\r\n    }\r\n    .my-row-3{\r\n        margin-left: -100px !important;\r\n        margin-right: 0px !important;\r\n    }\r\n}\r\n.footer-copyright{\r\n    line-height: 70px;\r\n    text-align: center;\r\n    font-weight: 700;\r\n}\r\n.footer-wrapper{\r\n    height: 70px;\r\n    margin-top: 48px;\r\n    text-align: center;\r\n}\r\n'
+    return '\r\n.my-margin-left-checkbox{\r\n    margin-left:0px !important\r\n}\r\n.portal-height{\r\n    height:69px;\r\n    line-height: 69px;\r\n}\r\n.portal-line-height{\r\n    line-height: 69px;\r\n}\r\n.my-font-color-white{\r\n    color:rgb(255,255,255)\r\n}\r\n.my-font-color-blue{\r\n    color:#0769AD\r\n}\r\na:hover,a:focus{\r\n    color:rgb(255,255,255);\r\n    text-decoration:underline;\r\n    cursor:pointer\r\n}\r\na{\r\n    color:rgb(255,255,255)\r\n}\r\n.infomation-div{\r\n    height: 200px;\r\n    /*width: 320px;*/\r\n}\r\n.infomation-div-network-color{\r\n    background-color: rgb(206,67,31);\r\n    background-image: url("../images/1.png");\r\n    background-repeat: no-repeat;\r\n    background-position-x:10px ;\r\n    background-position-y:55px;\r\n}\r\n.infomation-div-wifi-color{\r\n    background-color: rgb(46,156,28);\r\n    background-image: url("../images/2.png");\r\n    background-repeat: no-repeat;\r\n    background-position-x:10px ;\r\n    background-position-y:35px;\r\n}\r\n.infomation-div-sync-color{\r\n    background-color: rgb(222,157,46);\r\n    background-image: url("../images/3.png");\r\n    background-repeat: no-repeat;\r\n    background-position-x:10px ;\r\n    background-position-y:35px;\r\n}\r\n.my-bg-color{\r\n    /*background-color:#136DC9;*/\r\n    height: 775px;\r\n    background: url("../images/bg.jpg");\r\n    background-size: cover;\r\n    /*margin-bottom: 167px;*/\r\n}\r\n.my-own-font-size{\r\n    font-size:12px\r\n}\r\n.a-underline{\r\n    text-decoration: underline;\r\n}\r\n.my-float{\r\n    float: right;\r\n}\r\n.my-margin-top{\r\n    margin-top:85px\r\n}\r\n.my-font-weight{\r\n    font-weight:700\r\n}\r\n.my-normal-font-weight{\r\n    font-weight:normal;\r\n}\r\n.my-s-margin-top{\r\n    margin-top:15px\r\n}\r\n.my-lable-line-height{\r\n    line-height: 34px;\r\n}\r\n.my-pre-step-next-step-height{\r\n    height:400px;\r\n    position: relative;\r\n}\r\n.down-z-index{\r\n    z-index: -1;\r\n}\r\n.my-table-container-scroll{\r\n    height:225px;\r\n    overflow-y:scroll;\r\n}\r\n.my-table-margin-top{\r\n    margin-top: 12px !important;\r\n}\r\n.my-container-fluid-heihgt{\r\n    height:469px\r\n}\r\n.my-border-radius{\r\n    border-radius: 5px\r\n}\r\n.my-title-img{\r\n    width: 110px;\r\n    height: 80px;\r\n    position: relative;\r\n    top: -19px;\r\n    /*background: url("../images/Logo-InHand.png");*/\r\n    /*background-size: cover;*/\r\n}\r\n.mask_block{\r\n    background-image: url("../images/wait.gif");\r\n    width: 90px;\r\n    height: 90px;\r\n    background-size: cover;\r\n}\r\n.table-cell{\r\n    display: table-cell;\r\n    vertical-align: middle;\r\n}\r\n.my-font-style{\r\n    font-size:16px;\r\n    text-decoration: underline;\r\n    cursor: pointer;\r\n}\r\n.footer-margin-top{\r\n    margin-top:40px\r\n}\r\nbutton.adjust-en-ch{\r\n    width: 70px;\r\n}\r\n.addone-no-radius{\r\n    border-radius: 0px;\r\n    border-left: 0;\r\n    background-color: #fff !important;\r\n}\r\n.my-input-radius-control{\r\n    border-top-right-radius: 0px;\r\n    border-bottom-right-radius: 0px;\r\n}\r\n.footer-company{\r\n    margin-top: 90px;\r\n}\r\n\r\n@media (max-width: 768px) {\r\n    .lg-font-size{\r\n        display: none;\r\n    }\r\n    .container-wrapper{\r\n        /*background-color: #136DC9;*/\r\n        /*background:url("../images/bg.png") repeat-y ;*/\r\n        color:rgb(255,255,255);\r\n        width: 100%;\r\n        /*padding-bottom: 70px;*/\r\n        margin: 0px auto;\r\n        position: relative;\r\n        top:40px;\r\n        /*border:2px solid #136DC9;*/\r\n        border-radius: 10px;\r\n    }\r\n    .my-pre-step-next-step-position{\r\n        position: relative;\r\n        /*top:350px;*/\r\n        left:30%;\r\n        width:160px\r\n    }\r\n    .addone-no-radius{\r\n        display: none;\r\n    }\r\n    .addone-margin-left{\r\n        /*margin-left: 0px;*/\r\n        padding-left: 15px;\r\n        margin-top: 20px;\r\n    }\r\n    .my-input-radius-control{\r\n        border-top-right-radius: 4px;\r\n        border-bottom-right-radius: 4px;\r\n    }\r\n    .addone-input-mobile{\r\n        border-top-left-radius: 4px !important;\r\n        border-bottom-left-radius: 4px !important;\r\n        margin-left: 15px;\r\n    }\r\n    .mask_block{\r\n        display: none!important;\r\n    }\r\n    .minify-style{\r\n        text-align: left!important;\r\n        padding-left: 0px!important;\r\n    }\r\n    .minify-margin-top{\r\n        margin-top: 25px;\r\n        padding-left: 15px;\r\n    }\r\n    .except-minify-padding{\r\n        padding-right: 15px!important;\r\n    }\r\n}\r\n@media (max-width: 992px) {\r\n    .lg-font-size{\r\n        /*display: none;*/\r\n        font-size: 26px;\r\n    }\r\n    .container-wrapper{\r\n        /*background-color: #136DC9;*/\r\n        /*background:url("../images/bg.png") repeat-y ;*/\r\n        color:rgb(255,255,255);\r\n        width: 100%;\r\n        /*padding-bottom: 70px;*/\r\n        margin: 0px auto;\r\n        position: relative;\r\n        top:40px;\r\n        /*border:2px solid #136DC9;*/\r\n        border-radius: 10px;\r\n    }\r\n    .my-pre-step-next-step-position{\r\n        position: relative;\r\n        /*top:350px;*/\r\n        left:50%;\r\n        width: 160px;\r\n    }\r\n    .except-minify-padding{\r\n        padding-right: 0px;\r\n    }\r\n}\r\n@media(min-width:993px ) {\r\n    .lg-font-size{\r\n        /*display: none;*/\r\n        font-size: 26px;\r\n    }\r\n    .my-table-checkbox{\r\n        position: absolute;\r\n        margin-left: 20px !important;\r\n    }\r\n    .my-pre-step-next-step-position{\r\n        position: absolute;\r\n        top:350px;\r\n        left:80%;\r\n        width: 160px;\r\n    }\r\n    .container-wrapper{\r\n        /*background-color: #136DC9;*/\r\n        /*background:url("../images/bg.png") repeat-y ;*/\r\n        color:rgb(255,255,255);\r\n        width: 73%;\r\n        /*padding-bottom: 70px;*/\r\n        margin: 0px auto;\r\n        position: relative;\r\n        top:40px;\r\n        /*border:2px solid #136DC9;*/\r\n        border-radius: 10px;\r\n    }\r\n    .except-minify-padding{\r\n        padding-right: 0px;\r\n    }\r\n}\r\n@media (min-width: 1200px) {\r\n    .lg-font-size{\r\n        /*display: none;*/\r\n        font-size: 40px;\r\n    }\r\n    .my-row-1{\r\n        margin-left: -87px !important;\r\n        margin-right: -7px !important;\r\n    }\r\n    .my-row-2{\r\n        margin-left: -83.5px !important;\r\n        margin-right: -3.5px !important;\r\n    }\r\n    .my-row-3{\r\n        margin-left: -87px !important;\r\n        margin-right: 0px !important;\r\n    }\r\n    .except-minify-padding{\r\n        padding-right: 0px;\r\n    }\r\n}\r\n@media(min-width: 1540px) {\r\n    .my-row-1{\r\n        margin-right: 0px !important;\r\n        margin-left: -96px !important;\r\n    }\r\n    .my-row-2{\r\n        margin-left: -96px !important;\r\n        margin-right: 4px !important\r\n    }\r\n    .my-row-3{\r\n        margin-left: -100px !important;\r\n        margin-right: 0px !important;\r\n    }\r\n    .except-minify-padding{\r\n        padding-right: 0px;\r\n    }\r\n}\r\n.footer-copyright{\r\n    line-height: 70px;\r\n    text-align: center;\r\n    font-weight: 700;\r\n}\r\n.footer-wrapper{\r\n    height: 70px;\r\n    margin-top: 48px;\r\n    text-align: center;\r\n}\r\n'
 ;
 }), function($) {
     var methods = {
@@ -7724,119 +7740,13 @@ element: element,
     };
     return validator;
 }), define("text!partials/director_1.html", [], function() {
-    return '<div class="container-fluid">\r\n    <div class="row portal-line-height">\r\n        <div class="col-xs-5 col-sm-8 col-md-8 col-lg-9">\r\n        </div>\r\n        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">\r\n        </div>\r\n        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">\r\n            <div class="my-float">\r\n                <span class="my-font-style" id="return-to-homepage" data-lang="{text:return_to_home}"></span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <form id="inner-view-container" class="form-horizontal container-fluid my-pre-step-next-step-height" role="form">\r\n        <div class="row portal-height"></div>\r\n        <div class="row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:interface_type}"></label>\r\n                <div class="col-sm-3">\r\n                    <select id="wan_port" class="form-control">\r\n                        <option value=1>3G/LTE</option>\r\n                        <option value=2>ADSL</option>\r\n                        <option value=3>DHCP</option>\r\n                        <option value=4>Static Ip Address</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:apn}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-apn" class="form-control validate[required]"  />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:username}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-username" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:password}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-password" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:dial_numbers}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-dial-number" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row adsl-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:username}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="adsl-username" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row adsl-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:password}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="adsl-password" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:main_ip}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-main-ip" class="form-control validate[required,custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:subnet_mask}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-subnet-mask" class="form-control validate[required,custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:gateway}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-gateway" class="form-control validate[required,custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:preferred_domain}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-preferred-domain" class="form-control validate[required,custom[ip]]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:alternate_domain}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-alternate-domain" class="form-control validate[custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="my-pre-step-next-step-position">\r\n            <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="pre-step" data-lang="{text:pre_step}"></button>\r\n            <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="next-step" data-lang="{text:next_step}"></button>\r\n        </div>\r\n    </form>\r\n</div>'
+    return '<div class="container-fluid">\r\n    <div class="row portal-line-height">\r\n        <div class="col-xs-5 col-sm-8 col-md-8 col-lg-9">\r\n        </div>\r\n        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-1">\r\n        </div>\r\n        <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">\r\n            <div class="my-float">\r\n                <span class="my-font-style" id="return-to-homepage" data-lang="{text:return_to_home}"></span>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <form id="inner-view-container" class="form-horizontal container-fluid my-pre-step-next-step-height" role="form">\r\n        <div class="row portal-height">\r\n           <h4 style="font-weight: 700;font-size: 14px;padding-right: 26px" class="col-sm-3 text-right minify-style" data-lang="{text:connect_internet}"></h4>\r\n        </div>\r\n        <div class="row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:interface_type}"></label>\r\n                <div class="col-sm-3">\r\n                    <select id="wan_port" class="form-control">\r\n                        <option value=1>3G/LTE</option>\r\n                        <option value=2>ADSL</option>\r\n                        <option value=3>DHCP</option>\r\n                        <option value=4>Static IP Address</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:apn}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-apn" class="form-control validate[required]"  />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:username}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-username" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:password}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-password" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row cell-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:dial_numbers}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="cellular-dial-number" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row adsl-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:username}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="adsl-username" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row adsl-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:password}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="adsl-password" class="form-control validate[required]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:main_ip}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-main-ip" class="form-control validate[required,custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:subnet_mask}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-subnet-mask" class="form-control validate[required,custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:gateway}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-gateway" class="form-control validate[required,custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:preferred_domain}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-preferred-domain" class="form-control validate[required,custom[ip]]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="row static-ip-address-row">\r\n            <div class="form-group">\r\n                <label class="col-sm-3 control-label" data-lang="{text:alternate_domain}"></label>\r\n                <div class="col-sm-3">\r\n                    <input type="text" id="static-ip-address-alternate-domain" class="form-control validate[custom[ip]]" />\r\n                </div>\r\n            </div>\r\n            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-7">\r\n            </div>\r\n        </div>\r\n        <div class="my-pre-step-next-step-position">\r\n            <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="pre-step" data-lang="{text:pre_step}"></button>\r\n            <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="next-step" data-lang="{text:next_step}"></button>\r\n        </div>\r\n    </form>\r\n</div>'
 ;
 }), define("text!partials/director_2.html", [], function() {
-    return '<div class="row portal-height"></div>\r\n<div class="row">\r\n    <div class="form-group">\r\n        <label for="rainbow_address" class="col-sm-3 col-md-3 col-lg-3 control-label" data-lang="{text:rainbow_ip}"></label>\r\n        <div class="col-sm-3 col-md-4 col-lg-3">\r\n            <input type="text" class="form-control my-input-radius-control validate[custom[rainbowip]]" id="rainbow_address" data-lang="{placeholder:enter_ip_address}" />\r\n        </div>\r\n        <div class="col-sm-2 col-md-1 col-lg-1 input-group addone-margin-left">\r\n            <div class="input-group-addon addone-no-radius">:</div>\r\n            <input type="text" class="form-control addone-input-mobile validate[custom[rainbowport]]" data-lang="{placeholder:port}" id="rainbow_port">\r\n        </div>\r\n    </div>\r\n    <div class="form-group">\r\n        <label for="check-mode"  class="col-sm-3 col-md-3 control-label" data-lang="{text:demo_mode}"></label>\r\n        <div class="col-sm-8">\r\n            <div class="checkbox">\r\n                <!--<label>-->\r\n                   <input type="checkbox" id="check-mode" class="my-margin-left-checkbox">\r\n                <!--</label>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class="my-pre-step-next-step-position">\r\n    <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="pre-step" data-lang="{text:pre_step}"></button>\r\n    <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="next-step" data-lang="{text:next_step}"></button>\r\n</div>'
+    return '<div class="row portal-height">\r\n    <h4 style="font-weight: 700;font-size: 14px;padding-right: 26px" class="minify-style col-sm-3 col-md-4 col-lg-3 text-right" data-lang="{text:manage_platform}"></h4>\r\n</div>\r\n<div class="row">\r\n    <div class="form-group">\r\n        <label for="rainbow_address" class="col-sm-3 col-md-3 col-lg-3 control-label" data-lang="{text:rainbow_ip}"></label>\r\n        <div class="col-sm-3 col-md-4 col-lg-3 except-minify-padding">\r\n            <input type="text" class="form-control my-input-radius-control validate[custom[rainbowip]]" id="rainbow_address" data-lang="{placeholder:enter_ip_address}" />\r\n        </div>\r\n        <div class="col-sm-2 col-md-1 col-lg-1 input-group addone-margin-left">\r\n            <div class="input-group-addon addone-no-radius">:</div>\r\n            <input type="text" class="form-control addone-input-mobile validate[custom[rainbowport]]" data-lang="{placeholder:port}" id="rainbow_port">\r\n        </div>\r\n    </div>\r\n    <div class="form-group">\r\n        <label for="check-mode"  class="col-sm-3 col-md-3 control-label" data-lang="{text:demo_mode}"></label>\r\n        <div class="col-sm-8">\r\n            <div class="checkbox">\r\n                <!--<label>-->\r\n                   <input type="checkbox" id="check-mode" class="my-margin-left-checkbox">\r\n                <!--</label>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class="my-pre-step-next-step-position">\r\n    <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="pre-step" data-lang="{text:pre_step}"></button>\r\n    <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="next-step" data-lang="{text:apply_config}"></button>\r\n</div>'
 ;
-}), define("text!partials/director_3.html", [], function() {
-    return '<div class="row portal-height"></div>\r\n<div class="row">\r\n    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">\r\n        <div class="form-group">\r\n            <label for="white-mac-1" class="col-sm-4 control-label" data-lang="{text:white_mac_1}">\u767d\u540d\u5355MAC1</label>\r\n            <div class="col-sm-8">\r\n                <input type="text" class="form-control validate[custom[macMacth]]" id="white-mac-1" data-lang="{placeholder:enter_mac}" />\r\n            </div>\r\n        </div>\r\n        <div class="form-group">\r\n            <label for="white-mac-2" class="col-sm-4 control-label" data-lang="{text:white_mac_3}">\u767d\u540d\u5355MAC2</label>\r\n            <div class="col-sm-8">\r\n                <input type="text" class="form-control validate[custom[macMacth]]" id="white-mac-2" data-lang="{placeholder:enter_mac}" />\r\n            </div>\r\n        </div>\r\n        <div class="form-group">\r\n            <label for="white-mac-3" class="col-sm-4 control-label" data-lang="{text:white_mac_3}">\u767d\u540d\u5355MAC2</label>\r\n            <div class="col-sm-8">\r\n                <input type="text" class="form-control validate[custom[macMacth]]" id="white-mac-3" data-lang="{placeholder:enter_mac}" />\r\n            </div>\r\n        </div>\r\n        <div class="form-group">\r\n            <label for="white-mac-4" class="col-sm-4 control-label" data-lang="{text:white_mac_4}">\u767d\u540d\u5355MAC2</label>\r\n            <div class="col-sm-8">\r\n                <input type="text" class="form-control validate[custom[macMacth]]" id="white-mac-4" data-lang="{placeholder:enter_mac}" />\r\n            </div>\r\n        </div>\r\n        <div class="form-group">\r\n            <label for="white-mac-5" class="col-sm-4 control-label" data-lang="{text:white_mac_5}">\u767d\u540d\u5355MAC2</label>\r\n            <div class="col-sm-8">\r\n                <input type="text" class="form-control validate[custom[macMacth]]" id="white-mac-5" data-lang="{placeholder:enter_mac}" />\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 my-table-container-scroll table-responsive">-->\r\n        <!--<table class="table-bordered table ">-->\r\n            <!--<thead>-->\r\n                <!--<tr>-->\r\n                    <!--<th><input id="th-check-all" type="checkbox" class="my-table-checkbox my-table-margin-top"/><label data-lang="{text:select_all}" for="th-check-all" class="col-sm-10 control-label"></label></th>-->\r\n                    <!--<th data-lang="{text:mac_address}"></th>-->\r\n                    <!--<th data-lang="{text:host_name}"></th>-->\r\n                <!--</tr>-->\r\n            <!--</thead>-->\r\n            <!--<tbody>-->\r\n            <!--</tbody>-->\r\n        <!--</table>-->\r\n    <!--</div>-->\r\n</div>\r\n<div class="my-pre-step-next-step-position">\r\n    <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="pre-step" data-lang="{text:pre_step}"></button>\r\n    <button type="button" class="btn btn-default btn-sm adjust-en-ch" id="apply-config" data-lang="{text:apply_config}"></button>\r\n</div>'
-;
-}), define("app/director_3", [ "require", "app/originalApp", "text!partials/director_3.html", "tool/locale", "tool/validator" ], function(require) {
-    var App = require("app/originalApp"), html = require("text!partials/director_3.html"), locale = require("tool/locale"), validator = require("tool/validator"), DirectorThree = Class.create(App, {
-        initialize: function($super, options) {
-            $super(options), this.preBrotherApp = options.appObj, this.mainApp = options.mainApp, this.rowArr = [], this.render();
-        },
-        render: function() {
-            var self = this;
-            self.viewContainer.html(html), self.bindEvents(), self.getMacWhiteList(), locale.render();
-        },
-        addClass: function() {
-            var self = this;
-            $(document).find("p.footer-company").addClass("footer-margin-top");
-        },
-        removeClass: function() {
-            var self = this;
-            $(document).find("p.footer-company").removeClass("footer-margin-top"
-);
-        },
-        getMacWhiteList: function() {
-            var self = this;
-            self.ajax({
-                type: "GEt",
-                url: "js/app/director_3.jsx",
-                success: function(data, textstatus) {
-                    var portalConfig = portal_wd_config, arr = portalConfig.wd_trusted_mac_list;
-                    self.setFormData(arr);
-                },
-                error: function(xhr, err) {}
-            });
-        },
-        setFormData: function(arr) {
-            var self = this;
-            arr.each(function(one, i) {
-                $("#white-mac-" + (i + 1)).val(one);
-            });
-        },
-        getTableData: function() {
-            var self = this;
-            $.ajax({
-                url: "json/device.json",
-                type: "get",
-                contentType: "application/json",
-                success: function(data, textstatus) {
-                    typeof data == "string" && (data = JSON.parse(data)), data.each(function(
-one) {
-                        var row = $("<tr></tr>");
-                        row.data = one;
-                        var col1 = $("<td><input type='checkbox' class='my-table-checkbox '></td>").appendTo(row), col2 = $("<td></td>").text(one.mac).appendTo(row), col3 = $("<td></td>").text(one.name).appendTo(row);
-                        self.viewContainer.find("table tbody").append(row);
-                    });
-                }
-            });
-        },
-        bindEvents: function() {
-            var self = this;
-            self.viewContainer.find("#pre-step").bind("click", function(e) {
-                self.destroySelfAll(), self.fire("afterClick");
-            }).end().find("#apply-config").bind("click", function(e) {
-                var callback = function(data) {
-                    this.ajax({
-                        url: "../apply.cgi",
-                        type: "POST",
-                        data: data,
-                        processData: !1,
-                        contentType
-: "text/plain;charset=utf-8",
-                        success: function(data, textStatus) {
-                            self.destroySelfAll(), $("#return-to-homepage").trigger("click");
-                        },
-                        error: function(xhr, err) {},
-                        showBlock: !0
-                    });
-                };
-                validator.result("#inner-view-container") && self.mergeAndSendFormData(callback);
-            }).end().find("#th-check-all").bind("click", function(e) {
-                e.target.checked ? self.viewContainer.find("table tbody td input[type='checkbox']").prop("checked", !0) : self.viewContainer.find("table tbody td input[type='checkbox']").prop("checked", !1);
-            }).end();
-        },
-        mergeAndSendFormData: function(callback) {
-            var self = this, data = [];
-            for (var i = 0; i < 5; i++) {
-                var str = "white-mac-" + (i + 1), arrEle = $("#" + str).val();
-                data.push(arrEle
-);
-            }
-            var template_part = "\nportal trusted-mac ", iterateTemplate = "", flag = !1;
-            data.each(function(one) {
-                one && (iterateTemplate += template_part + one, flag = !0);
-            }), flag || (iterateTemplate = "");
-            var result = "!" + iterateTemplate + "\nportal enable", str = "_ajax=1&_web_cmd=" + encodeURIComponent(result);
-            callback.call(self, str);
-        },
-        rebuild: function() {
-            var self = this;
-            self.render();
-        },
-        destroySelfAll: function() {
-            var self = this;
-            self.viewContainer.find("#pre-step").unbind().end().find("#next-step").unbind(), self.destroy();
-        }
-    });
-    return DirectorThree;
-}), define("app/director_2", [ "require", "text!partials/director_2.html", "app/originalApp", "app/director_3", "tool/locale", "tool/validator" ], function(require) {
-    var html = require("text!partials/director_2.html"), App = require("app/originalApp"
-), DirectorThree = require("app/director_3"), locale = require("tool/locale"), validator = require("tool/validator"), DirectorTwo = Class.create(App, {
+}), define("app/director_2", [ "require", "text!partials/director_2.html", "app/originalApp", "tool/locale", "tool/validator" ], function(require) {
+    var html = require("text!partials/director_2.html"), App = require("app/originalApp"), locale = require("tool/locale"), validator = require("tool/validator"), DirectorTwo = Class.create(App, {
         initialize: function($super, options) {
             $super(options), this.preBrotherApp = options.appObj, this.mainApp = options.mainApp, this.render();
         },
@@ -7851,11 +7761,11 @@ one) {
             var self = this;
             self.ajax({
                 type: "GET",
-                url: "json/cliCommand.json",
+                url: "json/cliCommand.json"
+,
                 success: function(data, textStatus) {
                     typeof data == "string" && (data = JSON.parse(data)), self.rainbowPostTemplate = data.rainbowconfig.cli_cmd_post;
-                
-},
+                },
                 error: function(xhr, err) {}
             });
         },
@@ -7878,34 +7788,29 @@ one) {
             });
         },
         bindEvents: function() {
-            var self = this;
+            var self = 
+this;
             self.viewContainer.find("#pre-step").bind("click", function(e) {
                 self.destroySelfAll(), self.fire("afterClick");
-            }).end().find("#next-step").bind("click", function(
-e) {
+            }).end().find("#next-step").bind("click", function(e) {
                 var callback = function(data) {
-                    self.destroySelfAll(), self.directorThree = new DirectorThree({
-                        elementId: "inner-view-container",
-                        events: {
-                            afterClick: function() {
-                                self.rebuild();
-                            },
-                            scope: self
-                        }
-                    }), this.ajax({
+                    this.ajax({
                         url: "../apply.cgi",
                         type: "POST",
                         data: data,
                         processData: !1,
                         contentType: "text/plain;charset=utf-8",
-                        success: function(data, textStatus) {},
-                        error: function(xhr, err) {}
+                        success: function(data, textStatus) {
+                            $("#return-to-homepage").trigger("click");
+                        },
+                        error: function(xhr, err) {},
+                        showBlock: !0
                     });
                 };
                 validator.result("#inner-view-container") && self.mergeAndSendFormData(callback);
-            }).end().find("#rainbow_port").bind("change"
-, function(e) {
-                var temp = $(this).val(), regex = /^\d+$/;
+            }).end().find("#rainbow_port").bind("change", function(e) {
+                
+var temp = $(this).val(), regex = /^\d+$/;
                 regex.test(temp) && (temp = parseInt(temp), $(this).val(temp));
             });
         },
@@ -7925,8 +7830,8 @@ e) {
         }
     });
     return DirectorTwo;
-}), define("app/director_1", [ "require", "text!partials/director_1.html"
-, "app/originalApp", "app/director_2", "tool/locale", "tool/validator" ], function(require) {
+}), define("app/director_1", [ "require", "text!partials/director_1.html", "app/originalApp"
+, "app/director_2", "tool/locale", "tool/validator" ], function(require) {
     var html = require("text!partials/director_1.html"), App = require("app/originalApp"), DirectorTwo = require("app/director_2"), locale = require("tool/locale"), validator = require("tool/validator"), DirectorOne = Class.create(App, {
         initialize: function($super, options) {
             $super(options), this.wanRowClassArray = [ "", "cell-row", "adsl-row", "dhcp-row", "static-ip-address-row" ], this.mainApp = options.mainApp, this.render();
@@ -7939,8 +7844,8 @@ e) {
             }), locale.render();
         },
         setFormData: function(obj) {
-            var self = this, cellular = obj.cellularConfig, adsl = obj.adslConfig
-, dhcp = obj.staticIpConfig;
+            var self = this, cellular = obj.cellularConfig, adsl = obj.adslConfig, dhcp = obj.staticIpConfig
+;
             $("#cellular-apn").val(cellular.apn), $("#cellular-dial-number").val(cellular.dialNumber), $("#cellular-username").val(cellular.username), $("#cellular-password").val(cellular.password), adsl && ($("#adsl-username").val(adsl.username), $("#adsl-password").val(adsl.password)), $("#static-ip-address-main-ip").val(dhcp.staticIp), dhcp.subnetMask ? $("#static-ip-address-subnet-mask").val(dhcp.subnetMask) : $("#static-ip-address-subnet-mask").val("255.255.255.0"), $("#static-ip-address-gateway").val(dhcp.gateway), $("#static-ip-address-preferred-domain").val(dhcp.dns_1), $("#static-ip-address-alternate-domain").val(dhcp.dns_2), self.setSelect();
         },
         setSelect: function() {
@@ -7950,9 +7855,9 @@ e) {
                 $("select#wan_port").val(1).trigger("change");
                 break;
               case "dialer 10":
-                $("select#wan_port").val(2).trigger("change"
-);
-                break;
+                $("select#wan_port").val(2).trigger("change");
+                
+break;
               case "vlan 10":
                 self.distinguish == 1 ? $("select#wan_port").val(3).trigger("change") : self.distinguish == 0 && $("select#wan_port").val(4).trigger("change");
                 break;
@@ -7970,8 +7875,8 @@ e) {
                         one[0] == "0.0.0.0" && one[1] == "0.0.0.0" && (self.wanPort = one[2], self.gateway = one[3]);
                     });
                     var cellularConfig = {}, arr_1 = cellular1_config.profiles[0];
-                    
-cellularConfig.apn = arr_1[2], cellularConfig.dialNumber = arr_1[3], cellularConfig.username = arr_1[5], cellularConfig.password = arr_1[6];
+                    cellularConfig
+.apn = arr_1[2], cellularConfig.dialNumber = arr_1[3], cellularConfig.username = arr_1[5], cellularConfig.password = arr_1[6];
                     if (dialer_config.length != 0) {
                         var adslConfig = {}, arr_2 = dialer_config[0];
                         adslConfig.username = arr_2[4], adslConfig.password = arr_2[5];
@@ -7982,8 +7887,8 @@ cellularConfig.apn = arr_1[2], cellularConfig.dialNumber = arr_1[3], cellularCon
                     arr_3 && (self.distinguish = arr_3[6], staticIpConfig.staticIp = arr_3[3], staticIpConfig.subnetMask = arr_3[4]), staticIpConfig.gateway = self.gateway, staticIpConfig.dns_1 = dns_server.dns_1, staticIpConfig.dns_2 = dns_server.dns_2;
                     var obj = {};
                     obj.cellularConfig = cellularConfig, obj.adslConfig = adslConfig, obj.staticIpConfig = staticIpConfig, self.setFormData(obj);
-                    
-var date3 = new Date;
+                    var date3 = new 
+Date;
                     console.log("\u6e32\u67d3\u5b8c\u6bd5" + (date3.getTime() - date1.getTime()) / 1e3 + "s");
                 }
             });
@@ -8004,9 +7909,9 @@ var date3 = new Date;
             index = parseInt(index);
             switch (index) {
               case 1:
-                var obj = {}
-;
-                obj.number = 1, obj.apn = $("#cellular-apn").val(), obj.dialNumber = $("#cellular-dial-number").val(), obj.username = $("#cellular-username").val(), obj.password = $("#cellular-password").val();
+                var obj = {};
+                
+obj.number = 1, obj.apn = $("#cellular-apn").val(), obj.dialNumber = $("#cellular-dial-number").val(), obj.username = $("#cellular-username").val(), obj.password = $("#cellular-password").val();
                 var template = new Template(self.cellularPostTemplate), result = template.evaluate(obj), str = "_ajax=1&_web_cmd=" + encodeURIComponent(result);
                 callback.call(self, str);
                 break;
@@ -8019,9 +7924,9 @@ var date3 = new Date;
               case 3:
                 var result = self.dhcpPostTemplate, str = "_ajax=1&_web_cmd=" + encodeURIComponent(result);
                 callback.call(self, str);
-                
-break;
-              case 4:
+                break;
+              
+case 4:
                 var obj = {};
                 obj.staticIp = $("#static-ip-address-main-ip").val(), obj.subnetMask = $("#static-ip-address-subnet-mask").val(), obj.gateway = $("#static-ip-address-gateway").val(), obj.dns_1 = $("#static-ip-address-preferred-domain").val(), obj.dns_2 = $("#static-ip-address-alternate-domain").val(), obj.dns_2 && (self.staticIpPostTemplate = self.staticIpPostTemplate.replace(/8\.8\.8\.8/g, obj.dns_2));
                 var template = new Template(self.staticIpPostTemplate), result = template.evaluate(obj), str = "_ajax=1&_web_cmd=" + encodeURIComponent(result);
@@ -8032,8 +7937,8 @@ break;
         },
         bindEvents: function() {
             var self = this;
-            self.allCellRows = self.viewContainer.find("div.cell-row"), self.allAdslRows = self.viewContainer.find("div.adsl-row").hide(), self.allDhcpRows = self.viewContainer.find("div.dhcp-row").hide
-(), self.allStaticIpRows = self.viewContainer.find("div.static-ip-address-row").hide(), self.rowsElementArray = [ "", self.allCellRows, self.allAdslRows, self.allDhcpRows, self.allStaticIpRows ], self.viewContainer.find("#return-to-homepage").bind("click", function(e) {
+            self.allCellRows = self.viewContainer.find("div.cell-row"), self.allAdslRows = self.viewContainer.find("div.adsl-row").hide(), self.allDhcpRows = self.viewContainer.find("div.dhcp-row").hide(), self.allStaticIpRows = 
+self.viewContainer.find("div.static-ip-address-row").hide(), self.rowsElementArray = [ "", self.allCellRows, self.allAdslRows, self.allDhcpRows, self.allStaticIpRows ], self.viewContainer.find("#return-to-homepage").bind("click", function(e) {
                 self.destroySelfAll(), self.fire("afterClick");
             }).end().find("#pre-step").bind("click", function(e) {
                 self.destroySelfAll(), self.fire("afterClick");
@@ -8048,8 +7953,8 @@ break;
                             scope: self
                         }
                     }), this.ajax({
-                        
-url: "../apply.cgi",
+                        url
+: "../apply.cgi",
                         type: "POST",
                         data: data,
                         processData: !1,
@@ -8141,24 +8046,41 @@ self._hideAndShow(4);
 require) {
     var html = require("text!partials/mainApp.html"), App = require("app/originalApp");
     require("text!../../css/mainApp.css");
-    var locale = require("tool/locale"), validator = require("tool/validator"), DirectorOne = require("app/director_1"), MainApp = Class.create(App, {
+    var locale = require("tool/locale"), validator = require("tool/validator"), DirectorOne = require("app/director_1");
+    function timeFormate(seconds) {
+        if (seconds > 0 && seconds < 60) return seconds + locale.get("seconds");
+        if (seconds >= 60 && seconds < 3600) {
+            var leftSeconds = seconds % 60, minutes = (seconds - leftSeconds) / 60;
+            return minutes + locale.get("minutes") + leftSeconds + locale.get("seconds");
+        }
+        if (seconds >= 3600 && seconds < 86400) {
+            var leftSeconds = seconds % 3600, hours = (seconds - leftSeconds) / 3600, tempLeftSeconds = leftSeconds % 60, minutes = (leftSeconds - tempLeftSeconds) / 60;
+            return hours + locale.get("hours") + minutes + locale.get("minutes") + tempLeftSeconds + locale.get("seconds");
+        }
+        if (seconds >= 86400) {
+            
+var leftSeconds = seconds % 86400, days = (seconds - leftSeconds) / 86400, tempLeftSeconds = leftSeconds % 3600, hours = (leftSeconds - tempLeftSeconds) / 3600, finaLeftSeconds = tempLeftSeconds % 60, minutes = (tempLeftSeconds - finaLeftSeconds) / 60;
+            return days + locale.get("days") + hours + locale.get("hours") + minutes + locale.get("minutes") + finaLeftSeconds + locale.get("seconds");
+        }
+    }
+    var MainApp = Class.create(App, {
         initialize: function($super, options) {
             $super(options), this.render();
         },
         render: function() {
             var self = this;
-            self.viewContainer.html(html), self.bindEvents(), locale.render(), self.getUserData(), self.getSummaryConfig();
+            self.viewContainer.html(html), self.bindEvents(), locale.render(), self.getUserData();
         },
         bindEvents: function() {
             var self = this;
             self.viewContainer.find("#config-director").bind("click", function(e) {
                 self.destroys(), self.directorOne = null, self.directorOne = new DirectorOne({
-                    elementId: "page-view",
+                    elementId: "page-view"
+,
                     events: {
                         afterClick: function() {
                             self.rebuild();
-                        
-},
+                        },
                         scope: self
                     }
                 });
@@ -8171,13 +8093,51 @@ require) {
         getUserData: function() {
             var self = this;
             self.ajax({
-                url: "json/user.json",
+                url: "js/app/mainApp.jsx",
                 type: "get",
-                contentType: "application/json",
                 success: function(data, textStatus) {
-                    typeof data == "string" && (data = JSON.parse(data)), $("#nav-row").find("#user-name").text(data.name);
+                    eval(data), $("#nav-row").find("#user-name").text("admin"), static_route_config.each(function(one) {
+                        one[0] == "0.0.0.0" && one[1] == "0.0.0.0" && (self.wanPort = one[2]);
+                    });
+                    var data = self.formatData();
+                    self.viewContainer.find("#network-state").text(data.statusComment + "\uff0c" + data.wanPort).end().find("#network-period").text
+(data.connectTime).end();
                 }
             });
+        },
+        formatData: function() {
+            var self = this, network = new Object;
+            if (self.wanPort.indexOf("cellular") != -1) {
+                network.wanPort = "3G/LTE";
+                var cellular_arr = cellular_interface.find(function(one) {
+                    return one[0] == "cellular 1";
+                }), posSt = cellular_arr[2];
+                posSt == 1 ? network.statusComment = locale.get("connected") : posSt == 0 && (network.statusComment = locale.get("disconnected"));
+                var posTime = cellular_arr[8];
+                posTime == 0 ? network.connectTime = locale.get("disconnected") : posTime > 0 && (network.connectTime = timeFormate(posTime));
+            } else if (self.wanPort.indexOf("dialer") != -1) {
+                network.wanPort = "ADSL";
+                var arr_adsl = xdsl_interface.find(function(one) {
+                    return one[0].indexOf("dialer") != -1;
+                
+}), posSt = arr_adsl[2];
+                posSt == "1" ? network.statusComment = locale.get("connected") : posSt == "0" && (network.statusComment = locale.get("disconnected"));
+                var posTime = arr_adsl[8];
+                posTime == 0 ? network.connectTime = locale.get("disconnected") : posTime > 0 && (network.connectTime = timeFormate(posTime));
+            } else if (self.wanPort.indexOf("vlan") != -1) {
+                var arr_vlan = svi_interface.find(function(one) {
+                    return one[0] == "vlan 10";
+                });
+                if (arr_vlan) {
+                    arr_vlan[6] == "1" ? network.wanPort = "DHCP" : arr_vlan[6] == "0" && (network.wanPort = "Static IP");
+                    var posSt = arr_vlan[2];
+                    posSt == "1" ? network.statusComment = locale.get("connected") : posSt == "0" && (network.statusComment = locale.get("disconnected"));
+                    var posTime = arr_vlan[9];
+                    posTime == 0 ? network
+.connectTime = locale.get("disconnected") : posTime > 0 && (network.connectTime = timeFormate(posTime));
+                }
+            }
+            return network;
         },
         getSummaryConfig: function() {
             var self = this;
@@ -8186,10 +8146,10 @@ require) {
                 type: "get",
                 contentType: "application/json",
                 success: function(data, textStatus) {
-                    typeof data == "string" && (data = JSON.parse(data)), self.viewContainer.find("#network-state"
-).text(data.network.state).end().find("#network-period").text(data.network.period).end().find("#network-flow").text(data.network.flow).end().find("#wifi-ssid").text(data.wifi.ssid).end().find("#wifi-devices").text(data.wifi.devices).end().find("#wifi-users").text(data.wifi.users).end().find("#sync-html").text(data.sync.html).end().find("#sync-scripts").text(data.sync.scripts).end().find("#sync-conf").text(data.sync.conf);
+                    typeof data == "string" && (data = JSON.parse(data)), self.viewContainer.find("#network-state").text(data.network.state).end().find("#network-period").text(data.network.period).end().find("#network-flow").text(data.network.flow).end().find("#wifi-ssid").text(data.wifi.ssid).end().find("#wifi-devices").text(data.wifi.devices).end().find("#wifi-users").text(data.wifi.users).end().find("#sync-html").text(data.sync.html).end().find("#sync-scripts").text(data.sync.scripts).end().find("#sync-conf").text(data.sync.conf);
                 }
-            });
+            
+});
         },
         destroys: function() {
             var self = this;
@@ -8209,16 +8169,16 @@ require) {
         "lib/jquery.validationEngine": [ "jquery" ],
         "lib/jquery.blockUI": [ "jquery" ],
         "tool/locale": [ "jquery" ],
-        "tool/validator"
-: [ "jquery" ]
+        "tool/validator": [ "jquery" ]
     }
 }), require([ "jquery", "prototype", "app/mainApp" ], function($, prototype, mainApp) {
     $(document).ready(function($) {
-        var language = navigator.language;
-        language == "zh-CN" ? localStorage.setItem("language", "zh_CN") : localStorage.setItem("language", "en");
+        var language = navigator.language ? navigator.language : navigator.userLanguage;
+        language.toLowerCase() == "zh-cn" ? localStorage.setItem("language", "zh_CN") : localStorage.setItem("language", "en");
         var app = new mainApp({
             elementId: "page-view"
         });
-        $("img.my-title-img").prop("src", "images/Logo-InHand.png");
+        
+$("img.my-title-img").prop("src", "images/Logo-InHand.png");
     });
 }), define("main", function() {});;

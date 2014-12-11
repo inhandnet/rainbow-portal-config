@@ -45,7 +45,7 @@ define({
 "white_mac_5":"白名单Mac5",
 "enter_mac":"输入Mac地址",
 "please_wait":"正在处理...",
-"connect_internet":"连接互联网:",
+"connect_internet":"连接互联网",
     "manage_platform":"管理平台",
     "minutes":"分",
     "seconds":"秒",
