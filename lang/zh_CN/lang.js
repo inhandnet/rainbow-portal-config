@@ -23,7 +23,7 @@ define({
 "username":"用户名",
 "password":"密码",
 "dial_numbers":"拨号号码",
-"main_ip":"主IP",
+"main_ip":"IP地址",
 "subnet_mask":"子网掩码",
 "gateway":"网关",
 "preferred_domain":"首选域名服务器",
@@ -44,5 +44,13 @@ define({
 "white_mac_4":"白名单Mac4",
 "white_mac_5":"白名单Mac5",
 "enter_mac":"输入Mac地址",
-"please_wait":"正在处理..."
+"please_wait":"正在处理...",
+"connect_internet":"连接互联网:",
+    "manage_platform":"管理平台",
+    "minutes":"分",
+    "seconds":"秒",
+    "hours":"小时",
+    "days":"天",
+    "connected":"已连接",
+    "disconnected":"未连接"
 })

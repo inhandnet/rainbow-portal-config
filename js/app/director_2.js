@@ -5,7 +5,7 @@ define(function(require){
 //    var DirectorOne=require("app/director_1");
     var html=require("text!partials/director_2.html");
     var App=require("app/originalApp");
-    var DirectorThree=require("app/director_3");
+    //var DirectorThree=require("app/director_3");
     var locale=require("tool/locale");
     var validator=require("tool/validator");
     var DirectorTwo=Class.create(App,{
@@ -77,16 +77,16 @@ define(function(require){
             }).end()
                 .find("#next-step").bind("click",function(e){
                     var callback=function(data){
-                        self.destroySelfAll();
-                        self.directorThree=new DirectorThree({
-                            elementId:"inner-view-container",
-                            events:{
-                                "afterClick":function(){
-                                    self.rebuild();
-                                },
-                                scope:self
-                            }
-                        });
+                        //self.destroySelfAll();
+                        //self.directorThree=new DirectorThree({
+                        //    elementId:"inner-view-container",
+                        //    events:{
+                        //        "afterClick":function(){
+                        //            self.rebuild();
+                        //        },
+                        //        scope:self
+                        //    }
+                        //});
                         this.ajax({
                             url:"../apply.cgi",
                             type:"POST",
@@ -94,11 +94,13 @@ define(function(require){
                             processData:false,
                             contentType:"text/plain;charset=utf-8",
                             success:function(data,textStatus){
-
+                                self.destroySelfAll();
+                                $("#return-to-homepage").trigger("click");
                             },
                             error:function(xhr,err){
 
-                            }
+                            },
+                            showBlock:true
                         });
                     };
                     if(validator.result("#inner-view-container")){

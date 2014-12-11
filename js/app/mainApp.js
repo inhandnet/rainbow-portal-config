@@ -5,6 +5,29 @@ define(function(require){
     var locale=require("tool/locale");
     var validator=require("tool/validator");
     var DirectorOne=require("app/director_1");
+    function timeFormate(seconds){
+        if(seconds>0&&seconds<60){
+            return seconds+locale.get("seconds");
+        }else if(seconds>=60&&seconds<3600){
+            var leftSeconds=seconds%60;
+            var minutes=(seconds-leftSeconds)/60;
+            return minutes+locale.get("minutes")+leftSeconds+locale.get("seconds");
+        }else if(seconds>=3600&&seconds<86400){
+            var leftSeconds=seconds%3600;
+            var hours=(seconds-leftSeconds)/3600;
+            var tempLeftSeconds=leftSeconds%60;
+            var minutes=(leftSeconds-tempLeftSeconds)/60;
+            return hours+locale.get("hours")+minutes+locale.get("minutes")+tempLeftSeconds+locale.get("seconds");
+        }else if(seconds>=86400){
+            var leftSeconds=seconds%86400;
+            var days=(seconds-leftSeconds)/86400;
+            var tempLeftSeconds=leftSeconds%3600;
+            var hours=(leftSeconds-tempLeftSeconds)/3600;
+            var finaLeftSeconds=tempLeftSeconds%60;
+            var minutes=(tempLeftSeconds-finaLeftSeconds)/60;
+            return days+locale.get("days")+hours+locale.get("hours")+minutes+locale.get("minutes")+finaLeftSeconds+locale.get("seconds");
+        }
+    }
     var MainApp=Class.create(App,{
         initialize:function($super,options){
             $super(options);
@@ -17,7 +40,7 @@ define(function(require){
             self.bindEvents();
             locale.render();
             self.getUserData();
-            self.getSummaryConfig();
+            //self.getSummaryConfig();
         },
         bindEvents:function(){
             var self=this;
@@ -44,17 +67,106 @@ define(function(require){
         getUserData:function(){
             var self=this;
             self.ajax({
-                url:"json/user.json",
+                url:"js/app/mainApp.jsx",
                 type:"get",
-                contentType:"application/json",
+                //contentType:"application/json",
                 success:function(data,textStatus){
-                    if(typeof data=="string"){
-                        data=JSON.parse(data);
-                    }
-                    $("#nav-row").find("#user-name").text(data.name);
+                    //if(typeof data=="string"){
+                    //    data=JSON.parse(data);
+                    //}
+                    $("#nav-row").find("#user-name").text("admin");
 //                    console.log(data);
+                    static_route_config.each(function(one){
+                        if(one[0]=="0.0.0.0"&&one[1]=="0.0.0.0"){
+                            self.wanPort=one[2];
+                            //self.gateway=one[3];
+                        }
+                    });
+                    var data=self.formatData();
+                    self.viewContainer.find("#network-state").text(data.statusComment+"，"+data.wanPort).end()
+                        .find("#network-period").text(data.connectTime).end()
+                        //.find("#network-flow").text(data.network.flow).end()
+                        //.find("#wifi-ssid").text(data.wifi.ssid).end()
+                        //.find("#wifi-devices").text(data.wifi.devices).end()
+                        //.find("#wifi-users").text(/*data.wifi.users*/"admin").end()
+                        //.find("#sync-html").text(data.sync.html).end()
+                        //.find("#sync-scripts").text(data.sync.scripts).end()
+                        //.find("#sync-conf").text(data.sync.conf);
                 }
             })
+        },
+        formatData: function () {
+            var self=this;
+            var network=new Object();
+            //switch (self.wanPort){
+            //    case "cellular 1":
+            if(self.wanPort.indexOf("cellular")!=-1){
+                network.wanPort="3G/LTE";
+                var cellular_arr=cellular_interface.find(function(one){
+                    return one[0]=="cellular 1";
+                });
+                var posSt=cellular_arr[2];
+                if(posSt==1){
+                    network.statusComment=locale.get("connected");
+                }else if(posSt==0){
+                    network.statusComment=locale.get("disconnected")
+                }
+                var posTime=cellular_arr[8];
+                if(posTime==0){
+                    network.connectTime=locale.get("disconnected");
+                }else if(posTime>0){
+                    network.connectTime=timeFormate(posTime);
+                }
+            }else if(self.wanPort.indexOf("dialer")!=-1){
+                network.wanPort="ADSL";
+                var arr_adsl=xdsl_interface.find(function (one) {
+                    return one[0].indexOf("dialer")!=-1;
+                });
+                var posSt=arr_adsl[2];
+                if(posSt=="1"){
+                    network.statusComment=locale.get("connected");
+                }else if(posSt=="0"){
+                    network.statusComment=locale.get("disconnected");
+                }
+                var posTime=arr_adsl[8];
+                if(posTime==0){
+                    network.connectTime=locale.get("disconnected");
+                }else if(posTime>0){
+                    network.connectTime=timeFormate(posTime);
+                }
+            }else if(self.wanPort.indexOf("vlan")!=-1){
+                var arr_vlan=svi_interface.find(function(one){
+                    return one[0]=="vlan 10";
+                });
+                if(arr_vlan) {
+                    //self.distinguish = arr_3[6];
+                    if(arr_vlan[6]=="1"){
+                        network.wanPort="DHCP";
+                    }else if(arr_vlan[6]=="0"){
+                        network.wanPort="Static IP"
+                    }
+                    var posSt=arr_vlan[2];
+                    if(posSt=="1"){
+                        network.statusComment=locale.get("connected");
+                    }else if(posSt=="0"){
+                        network.statusComment=locale.get("disconnected");
+                    }
+                    var posTime=arr_vlan[9];
+                    if(posTime==0){
+                        network.connectTime=locale.get("disconnected");
+                    }else if(posTime>0){
+                        network.connectTime=timeFormate(posTime);
+                    }
+                }
+            }
+                //case "dialer xxx":
+                //    break;
+                //case "vlan 10":
+
+            //        break;
+            //    default :
+            //}
+            return network;
         },
         getSummaryConfig:function(){
             var self=this;

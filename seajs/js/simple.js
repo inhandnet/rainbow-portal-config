@@ -1,1 +1,0 @@
-define("app/app1",["require","exports","module"],function(e,t,n){alert("a1")}),define("app/app2",["require","exports","module"],function(e,t,n){alert("a2")}),define("app/app3",["require","exports","module"],function(e,t,n){alert("a3")}),require(["app/app1","app/app2","app/app3"],function(e,t,n){}),define("main",function(){});

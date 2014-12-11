@@ -18,8 +18,8 @@ require.config({
 });
 require(["jquery","prototype","app/mainApp"],function($,prototype,mainApp){
         $(document).ready(function($){
-            var language=navigator.language;
-            if(language=="zh-CN"){
+            var language=navigator.language?navigator.language:navigator.userLanguage;
+            if(language.toLowerCase()=="zh-cn"){
                 localStorage.setItem("language","zh_CN");
             }else{
                 localStorage.setItem("language","en");

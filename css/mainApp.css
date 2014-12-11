@@ -32,7 +32,7 @@ a{
     background-image: url("../images/1.png");
     background-repeat: no-repeat;
     background-position-x:10px ;
-    background-position-y:35px;
+    background-position-y:55px;
 }
 .infomation-div-wifi-color{
     background-color: rgb(46,156,28);
@@ -128,9 +128,6 @@ a{
 button.adjust-en-ch{
     width: 70px;
 }
-.addone-margin-left{
-    margin-left: -15px;
-}
 .addone-no-radius{
     border-radius: 0px;
     border-left: 0;
@@ -170,7 +167,9 @@ button.adjust-en-ch{
         display: none;
     }
     .addone-margin-left{
-        margin-left: 0px;
+        /*margin-left: 0px;*/
+        padding-left: 15px;
+        margin-top: 20px;
     }
     .my-input-radius-control{
         border-top-right-radius: 4px;
@@ -183,6 +182,17 @@ button.adjust-en-ch{
     }
     .mask_block{
         display: none!important;
+    }
+    .minify-style{
+        text-align: left!important;
+        padding-left: 0px!important;
+    }
+    .minify-margin-top{
+        margin-top: 25px;
+        padding-left: 15px;
+    }
+    .except-minify-padding{
+        padding-right: 15px!important;
     }
 }
 @media (max-width: 992px) {
@@ -207,6 +217,9 @@ button.adjust-en-ch{
         /*top:350px;*/
         left:50%;
         width: 160px;
+    }
+    .except-minify-padding{
+        padding-right: 0px;
     }
 }
 @media(min-width:993px ) {
@@ -236,7 +249,9 @@ button.adjust-en-ch{
         /*border:2px solid #136DC9;*/
         border-radius: 10px;
     }
-
+    .except-minify-padding{
+        padding-right: 0px;
+    }
 }
 @media (min-width: 1200px) {
     .lg-font-size{
@@ -255,6 +270,9 @@ button.adjust-en-ch{
         margin-left: -87px !important;
         margin-right: 0px !important;
     }
+    .except-minify-padding{
+        padding-right: 0px;
+    }
 }
 @media(min-width: 1540px) {
     .my-row-1{
@@ -268,6 +286,9 @@ button.adjust-en-ch{
     .my-row-3{
         margin-left: -100px !important;
         margin-right: 0px !important;
+    }
+    .except-minify-padding{
+        padding-right: 0px;
     }
 }
 .footer-copyright{

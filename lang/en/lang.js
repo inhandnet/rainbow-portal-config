@@ -23,7 +23,7 @@ define({
 "username":"Username",
 "password":"Password",
 "dial_numbers":"Dialed Numbers",
-"main_ip":"Main IP",
+"main_ip":"IP Address",
 "subnet_mask":"Subnet Mask",
 "gateway":"Gateway",
 "preferred_domain":"Preferred DNS",
@@ -44,5 +44,13 @@ define({
 "white_mac_4":"White Mac 4",
 "white_mac_5":"White Mac 5",
 "enter_mac":"Enter Mac",
-"please_wait":"Please Wait..."
+"please_wait":"Please Wait...",
+    "connect_internet":"Connect InterNet",
+    "manage_platform":"Manage Platform",
+    "minutes":"minute(s)",
+    "seconds":"second(s)",
+    "hours":"hour(s)",
+    "days":"day(s)",
+    "connected":"connected",
+    "disconnected":"disconnected"
 })
