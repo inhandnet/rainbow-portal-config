@@ -8096,12 +8096,12 @@ var leftSeconds = seconds % 86400, days = (seconds - leftSeconds) / 86400, tempL
                 url: "js/app/mainApp.jsx",
                 type: "get",
                 success: function(data, textStatus) {
-                    eval(data), $("#nav-row").find("#user-name").text("admin"), static_route_config.each(function(one) {
+                    eval(data), console.log(data), $("#nav-row").find("#user-name").text("admin"), static_route_config.each(function(one) {
                         one[0] == "0.0.0.0" && one[1] == "0.0.0.0" && (self.wanPort = one[2]);
                     });
                     var data = self.formatData();
-                    self.viewContainer.find("#network-state").text(data.statusComment + "\uff0c" + data.wanPort).end().find("#network-period").text
-(data.connectTime).end();
+                    self.viewContainer.find("#network-state").text(data.statusComment + "\uff0c" + data.wanPort).end().find("#network-period"
+).text(data.connectTime).end();
                 }
             });
         },
