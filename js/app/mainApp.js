@@ -95,6 +95,22 @@ define(function(require){
                         localStorage.setItem("language","en");
                     }
                     locale.render();
+                    //退出按钮
+                    $("#config-quit").bind("click",function(e){
+                        sweetAlert({
+                            title: locale.get("awayFromConfig"),
+                            //text: "You will not be able to recover this imaginary file!",
+                            type: "warning",
+                            showCancelButton: true,
+                                cancelButtonText:locale.get("cancell"),
+                            confirmButtonColor: "#3F9B40",
+                            confirmButtonText: locale.get("confirm"),
+                            closeOnConfirm: false
+                        },
+                            function () {
+                                window.location="index.html";
+                            })
+                    })
                 }
             })
         },

@@ -53,5 +53,8 @@ define({
     "days":"天",
     "connected":"已连接",
     "disconnected":"未连接",
-    "unknown":"未知"
+    "unknown":"未知",
+    "awayFromConfig":"离开配置页面",
+    "confirm":"确定",
+    "cancell":"取消"
 })

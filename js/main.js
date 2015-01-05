@@ -7,7 +7,8 @@ require.config({
         "jquery":"lib/jquery-1.11.1.min",
         "prototype":"lib/prototype",
         "lang":"../lang",
-        "text":"lib/text"
+        "text":"lib/text",
+        "sweet":"lib/sweet-alert.min"
     },
     shim:{
         "lib/jquery.validationEngine":["jquery"],
@@ -16,7 +17,7 @@ require.config({
         "tool/validator":["jquery"]
     }
 });
-require(["jquery","prototype","app/mainApp"],function($,prototype,mainApp){
+require(["jquery","prototype","app/mainApp","sweet"],function($,prototype,mainApp){
         $(document).ready(function($){
             //var language=navigator.language?navigator.language:navigator.userLanguage;
             //if(language.toLowerCase()=="zh-cn"){
@@ -29,6 +30,20 @@ require(["jquery","prototype","app/mainApp"],function($,prototype,mainApp){
             });
             $("img.my-title-img").prop("src","images/Logo-InHand.png");
         });
-
+        //$("#config-quit").bind("click",function(e){
+        //    sweetAlert({
+        //            title: /*locale.get("awayFromConfig")*/"确定离开？",
+        //            //text: "You will not be able to recover this imaginary file!",
+        //            type: "warning",
+        //            showCancelButton: true,
+        //            cancelButtonText:/*locale.get("cancell")*/"取消",
+        //            confirmButtonColor: "#3F9B40",
+        //            confirmButtonText: /*locale.get("confirm")*/"确定",
+        //            closeOnConfirm: false
+        //        },
+        //        function () {
+        //            window.location="index.html";
+        //        })
+        //})
     }
 )

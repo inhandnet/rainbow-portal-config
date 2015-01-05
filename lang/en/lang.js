@@ -53,5 +53,8 @@ define({
     "days":"day(s)",
     "connected":"connected",
     "disconnected":"disconnected",
-    "unknown":"Unknown"
+    "unknown":"Unknown",
+    "awayFromConfig":"Leave the configuration page",
+    "confirm":"Confirm",
+    "cancell":"Cancell"
 })
