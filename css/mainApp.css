@@ -31,8 +31,7 @@ a{
     background-color: rgb(63, 155, 64);
     background-image: url("../images/1.png");
     background-repeat: no-repeat;
-    background-position-x:10px ;
-    background-position-y:55px;
+    background-position: 10px 55px;
 }
 .infomation-div-wifi-color{
     background-color: rgb(46,156,28);

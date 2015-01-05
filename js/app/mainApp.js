@@ -38,7 +38,6 @@ define(function(require){
             var self=this;
             self.viewContainer.html(html);
             self.bindEvents();
-            locale.render();
             self.getUserData();
             //self.getSummaryConfig();
         },
@@ -71,16 +70,31 @@ define(function(require){
                 type:"get",
                 success:function(data,textStatus){
                     eval(data);
-                    console.log(data);
-                    $("#nav-row").find("#user-name").text("admin");
+                    $("#nav-row").find("#user-name").text(user_info.name);
                     static_route_config.each(function(one){
                         if(one[0]=="0.0.0.0"&&one[1]=="0.0.0.0"){
                             self.wanPort=one[2];
                         }
                     });
                     var data=self.formatData();
-                    self.viewContainer.find("#network-state").text(data.statusComment+"，"+data.wanPort).end()
+                    if(!data.statusComment){
+                        data.statusComment=locale.get("unknown");
+                    }
+                    if(!data.wanPort){
+                        data.wanPort=locale.get("unknown");
+                    }
+                    if(!data.connectTime){
+                        data.connectTime=locale.get("unknown");
+                    }
+                    self.viewContainer.find("#network-state").text(data.statusComment+","+data.wanPort).end()
                         .find("#network-period").text(data.connectTime).end();
+                    var language=ih_sysinfo.lang.toLowerCase();
+                    if(language=="chinese"){
+                        localStorage.setItem("language","zh_CN");
+                    }else{
+                        localStorage.setItem("language","en");
+                    }
+                    locale.render();
                 }
             })
         },

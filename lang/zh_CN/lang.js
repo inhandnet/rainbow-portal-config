@@ -1,5 +1,5 @@
 define({
-"inportal_description":"InPortal智能WI-FI路由器",
+"inportal_description":"InPortal智能Wi-Fi路由器",
 "copyright":"版权所有&copy;北京映翰通网络技术股份有限公司",
 "welcome":"欢迎",
 "exit":"退出",
@@ -33,7 +33,7 @@ define({
 "demo_mode":"演示模式",
 "port":"端口",
 "enter_ip_address":"输入ip或域名",
-"rainbow_ip":"火虹云地址",
+"rainbow_ip":"云平台地址",
 "apply_config":"完成配置",
 "host_name":"主机名",
 "mac_address":"Mac地址",
@@ -52,5 +52,6 @@ define({
     "hours":"小时",
     "days":"天",
     "connected":"已连接",
-    "disconnected":"未连接"
+    "disconnected":"未连接",
+    "unknown":"未知"
 })

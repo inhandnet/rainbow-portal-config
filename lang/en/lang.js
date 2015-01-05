@@ -1,5 +1,5 @@
 define({
-"inportal_description":"InPortal Smart WI-FI router",
+"inportal_description":"InPortal Smart Wi-Fi router",
 "copyright":"Copyright © Beijing Inhand Network Technology Co., Ltd.",
 "welcome":"Welcome",
 "exit":"Exit",
@@ -33,7 +33,7 @@ define({
 "demo_mode":"Demo Mode",
 "port":"Port",
 "enter_ip_address":"Enter Ip or host",
-"rainbow_ip":"Rainbow Address",
+"rainbow_ip":"Platform Address",
 "apply_config":"Complete",
 "host_name":"Host",
 "mac_address":"Mac",
@@ -52,5 +52,6 @@ define({
     "hours":"hour(s)",
     "days":"day(s)",
     "connected":"connected",
-    "disconnected":"disconnected"
+    "disconnected":"disconnected",
+    "unknown":"Unknown"
 })
