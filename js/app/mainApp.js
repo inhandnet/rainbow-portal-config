@@ -107,8 +107,10 @@ define(function(require){
                             confirmButtonText: locale.get("confirm"),
                             closeOnConfirm: false
                         },
+
                             function () {
-                                window.location="index.html";
+                                //退出操作在此进行
+                                window.location.href="logout.jsp";
                             })
                     })
                 }

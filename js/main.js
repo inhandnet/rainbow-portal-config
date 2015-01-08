@@ -42,7 +42,7 @@ require(["jquery","prototype","app/mainApp","sweet"],function($,prototype,mainAp
         //            closeOnConfirm: false
         //        },
         //        function () {
-        //            window.location="index.html";
+        //            window.location.href="./logout.jsp";
         //        })
         //})
     }
