@@ -1,0 +1,17 @@
+{
+    "network":{
+        "state":"正常, HSPA+",
+        "period":"21小时55分",
+        "flow":"18MB/12GB"
+    },
+    "wifi":{
+        "ssid":"WiFi Free",
+        "devices":"45",
+        "users":"20"
+    },
+    "sync":{
+        "html":"2014-1-1 17:03",
+        "conf":"2014-1-1 17:03",
+        "scripts":"2014-1-1 17:03"
+    }
+}

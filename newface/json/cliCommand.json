@@ -1,0 +1,18 @@
+{
+    "cellular":{
+       "cli_cmd_post":"#cellular config\ncellular 1 gsm profile #{number} #{apn} #{dialNumber} auto #{username} #{password}\n!\ninterface cellular 1\nno shutdown\ndialer profile 1\n!\ninterface cellular 1\nip nat outside\n!\nip snat inside list 100 interface cellular #{number}\nip route 0.0.0.0 0.0.0.0 cellular #{number}\nportal external-interface cellular 1\n!\nwrite\n"
+    },
+    "adsl":{
+        "cli_cmd_post":"#dialer config\ninterface fastethernet 1/2\nswitchport access vlan 10\n!\ninterface vlan 10\npppoe-client dial-pool-number 10\nno ip address\n!\ninterface dialer 10\ndialer pool 10\nppp authentication auto #{username} #{password}\nppp keepalive 120 3\n!\ninterface dialer 10\nip nat outside\n!\nip snat inside list 100 interface dialer 10\nip route 0.0.0.0 0.0.0.0 dialer 10\nportal external-interface dialer 10\n!\nwrite\n"
+    },
+    "dhcp":{
+        "cli_cmd_post":"#switch vlan config\ninterface fastethernet 1/2\nswitchport access vlan 10\n!\ninterface vlan 10\nip address dhcp\n!\ninterface vlan 10\nip nat outside\n!\nip snat inside list 100 interface vlan 10\nip route 0.0.0.0 0.0.0.0 vlan 10\nportal external-interface vlan 10\n!\nwrite\n"
+    },
+    "staticip":{
+        "cli_cmd_post":"#switch vlan config\ninterface fastethernet 1/2\nswitchport access vlan 10\n!\ninterface vlan 10\nip address #{staticIp} #{subnetMask}\n!\ninterface vlan 10\nip nat outside\n!\nip snat inside list 100 interface vlan 10\nip route 0.0.0.0 0.0.0.0 vlan 10 #{gateway}\nportal external-interface vlan 10\nip name-server #{dns_1} 8.8.8.8\n!\nwrite\n"
+    },
+    "rainbowconfig":{
+        "cli_cmd_post_mode_yes":"!\n#rainbow config\nrainbow trap-status interval 1\nrainbow trap-data interval 1\nrainbow trap-users interval 1\nrainbow trap-terminals interval 1\nrainbow trap-pvuv interval 1\nrainbow trap-netlog interval 1\nrainbow heartbeat interval 1\nrainbow trap-sysdata interval 1\nrainbow server #{server} port #{port}\nrainbow\nportal auth-server #{server}\n!\nwrite\n",
+        "cli_cmd_post_mode_no":"!\n#rainbow config\nrainbow trap-status interval 2\nrainbow trap-data interval 2\nrainbow trap-users interval 20\nrainbow trap-terminals interval 20\nrainbow trap-pvuv interval 60\nrainbow trap-netlog interval 240\nrainbow heartbeat interval 1\nrainbow trap-sysdata interval 60\nrainbow server #{server} port #{port}\nrainbow\nportal auth-server #{server}\n!\nwrite\n"
+    }
+}
