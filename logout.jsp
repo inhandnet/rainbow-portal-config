@@ -21,9 +21,9 @@
 			//xmlhttp.open("GET",".force_logout_offer_login_mozilla",true,user_info.name+'_logout',"");
 			//var oem = "/www/products/"+ih_sysinfo.oem_name + "/index.jsp";	
 			//xmlhttp.open("GET", oem, false,'_logout',"");
-			xmlhttp.open("GET","index.jsp",false,'_logout',"");
+			xmlhttp.open("GET","",false,'_logout',"");
 			xmlhttp.send();
-		}	  
+		}
 	}
 
 	function createXMLObject() {
@@ -49,7 +49,7 @@
         	authLogout();
 		//var oem = "/www/products/"+ih_sysinfo.oem_name + "/index.jsp";	
 		//window.location = oem; 
-		window.location = "index.jsp";
+		<%--window.location = "index.jsp";--%>
 		</script>
 		</p>
 		<!--

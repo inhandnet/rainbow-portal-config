@@ -36,7 +36,8 @@ define(function(require){
                     if(typeof data=="string"){
                         data=JSON.parse(data);
                     }
-                    self.rainbowPostTemplate=data.rainbowconfig.cli_cmd_post;
+                    self.rainbowPostTemplateYes=data.rainbowconfig.cli_cmd_post_mode_yes;
+                    self.rainbowPostTemplateNo=data.rainbowconfig.cli_cmd_post_mode_no;
                 },
                 error:function(xhr,err){
 
@@ -62,7 +63,11 @@ define(function(require){
             var self=this;
             $("#rainbow_address").val(obj.server);
             $("#rainbow_port").val(obj.port);
-            if(obj.enable){
+            var flag=(obj.trap_status==1)&&(obj.trap_data==1)
+                &&(obj.trap_users==1)&&(obj.trap_terminals==1)
+                &&(obj.trap_pvuv==1)&&(obj.trap_netlog==1)
+                &&(obj.trap_hb==1)&&(obj.trap_sysdata==1);
+            if(flag){
                 $("#check-mode").prop({
                     "checked":true
                 });
@@ -121,12 +126,15 @@ define(function(require){
             var data={};
             data.server=$("#rainbow_address").val();
             data.port=$("#rainbow_port").val();
+            var template="";
             if($("#check-mode").prop("checked")){
                 data.mode=1;
+                template=self.rainbowPostTemplateYes;
             }else{
                 data.mode=0;
+                template=self.rainbowPostTemplateNo;
             }
-            var template=new Template(self.rainbowPostTemplate);
+            var template=new Template(template);
             var result=template.evaluate(data);
             var str="_ajax=1&_web_cmd="+encodeURIComponent(result);
             callback.call(self,str);
