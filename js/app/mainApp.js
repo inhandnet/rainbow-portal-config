@@ -39,6 +39,9 @@ define(function(require){
             self.viewContainer.html(html);
             self.bindEvents();
             self.getUserData();
+            self.interval=setInterval(function(){
+                self.ajaxInterval();
+            },3000);
             //self.getSummaryConfig();
         },
         bindEvents:function(){
@@ -58,12 +61,31 @@ define(function(require){
                 });
 //                self=null;
             });
+            //退出按钮
+            $("#config-quit").bind("click",function(e){
+                sweetAlert({
+                        title: locale.get("awayFromConfig"),
+                        //text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        cancelButtonText:locale.get("cancell"),
+                        confirmButtonColor: "#3F9B40",
+                        confirmButtonText: locale.get("confirm"),
+                        closeOnConfirm: false
+                    },
+
+                    function () {
+                        //退出操作在此进行
+                        window.location.href="logout.jsp";
+                    })
+            });
         },
         rebuild:function(){
             var self=this;
             self.render();
+            clearInterval(self.interval);
         },
-        getUserData:function(){
+        ajaxInterval: function () {
             var self=this;
             self.ajax({
                 url:"js/app/mainApp.jsx",
@@ -95,26 +117,12 @@ define(function(require){
                         localStorage.setItem("language","en");
                     }
                     locale.render();
-                    //退出按钮
-                    $("#config-quit").bind("click",function(e){
-                        sweetAlert({
-                            title: locale.get("awayFromConfig"),
-                            //text: "You will not be able to recover this imaginary file!",
-                            type: "warning",
-                            showCancelButton: true,
-                                cancelButtonText:locale.get("cancell"),
-                            confirmButtonColor: "#3F9B40",
-                            confirmButtonText: locale.get("confirm"),
-                            closeOnConfirm: false
-                        },
-
-                            function () {
-                                //退出操作在此进行
-                                window.location.href="logout.jsp";
-                            })
-                    })
                 }
             })
+        },
+        getUserData:function(){
+            var self=this;
+            self.ajaxInterval();
         },
         formatData: function () {
             var self=this;
@@ -215,6 +223,7 @@ define(function(require){
             var self=this;
             self.destroy();
             self.viewContainer.find("#config-director").unbind();
+            clearInterval(self.interval);
         }
     });
     return MainApp;
