@@ -44,7 +44,7 @@ define(function(require){
                 }
             })
         },
-        getRainbowConfig:function(){
+        ajaxInterval:function(){
             var self=this;
             self.ajax({
                 type:"GET",
@@ -57,7 +57,11 @@ define(function(require){
                 error:function(xhr,err){
 
                 }
-            })
+            });
+        },
+        getRainbowConfig:function(){
+            var self=this;
+            self.ajaxInterval();
         },
         setFormData:function(obj){
             var self=this;
@@ -72,6 +76,7 @@ define(function(require){
                     "checked":true
                 });
             }
+            self.interval=setInterval(self.ajaxInterval,3000);
         },
         bindEvents:function(){
             var self=this;
@@ -142,10 +147,12 @@ define(function(require){
         destroySelfAll:function(){
             var self=this;
             self.viewContainer.find("#pre-step").unbind().end().find("#next-step").unbind();
+            clearInterval(self.interval);
             self.destroy();
         },
         rebuild:function(){
             var self=this;
+            clearInterval(self.interval);
             self.render();
         }
     });
