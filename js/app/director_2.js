@@ -76,7 +76,6 @@ define(function(require){
                     "checked":true
                 });
             }
-            self.interval=setInterval(self.ajaxInterval,3000);
         },
         bindEvents:function(){
             var self=this;
@@ -135,12 +134,10 @@ define(function(require){
         destroySelfAll:function(){
             var self=this;
             self.viewContainer.find("#pre-step").unbind().end().find("#next-step").unbind();
-            clearInterval(self.interval);
             self.destroy();
         },
         rebuild:function(){
             var self=this;
-            clearInterval(self.interval);
             self.render();
         }
     });
