@@ -44,7 +44,7 @@ define(function(require){
                 }
             })
         },
-        getRainbowConfig:function(){
+        ajaxInterval:function(){
             var self=this;
             self.ajax({
                 type:"GET",
@@ -57,7 +57,11 @@ define(function(require){
                 error:function(xhr,err){
 
                 }
-            })
+            });
+        },
+        getRainbowConfig:function(){
+            var self=this;
+            self.ajaxInterval();
         },
         setFormData:function(obj){
             var self=this;
@@ -77,21 +81,10 @@ define(function(require){
             var self=this;
             self.viewContainer .find("#pre-step").bind("click",function(e){
                 self.destroySelfAll();
-//                self.preBrotherApp.rebuild();
                 self.fire("afterClick");
             }).end()
                 .find("#next-step").bind("click",function(e){
                     var callback=function(data){
-                        //self.destroySelfAll();
-                        //self.directorThree=new DirectorThree({
-                        //    elementId:"inner-view-container",
-                        //    events:{
-                        //        "afterClick":function(){
-                        //            self.rebuild();
-                        //        },
-                        //        scope:self
-                        //    }
-                        //});
                         this.ajax({
                             url:"../apply.cgi",
                             type:"POST",
@@ -99,7 +92,6 @@ define(function(require){
                             processData:false,
                             contentType:"text/plain;charset=utf-8",
                             success:function(data,textStatus){
-                                //self.destroySelfAll();
                                 $("#return-to-homepage").trigger("click");
                             },
                             error:function(xhr,err){

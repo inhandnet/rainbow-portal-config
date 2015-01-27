@@ -71,6 +71,7 @@ define(function(require){
                     }
                     break;
                 default :
+                    $("select#wan_port").val(3).trigger("change");
                     break;
             }
         },
@@ -86,7 +87,7 @@ define(function(require){
 //                    data=""
 //                    eval(data);
                     var date2=new Date();
-                    console.log("请求成功，经过"+(date2.getTime()-date1.getTime())/1000+"s");
+                    //console.log("请求成功，经过"+(date2.getTime()-date1.getTime())/1000+"s");
                     static_route_config.each(function(one){
                         if(one[0]=="0.0.0.0"&&one[1]=="0.0.0.0"){
                             self.wanPort=one[2];
@@ -127,7 +128,7 @@ define(function(require){
                     obj.staticIpConfig=staticIpConfig;
                     self.setFormData(obj);
                     var date3=new Date();
-                    console.log("渲染完毕"+(date3.getTime()-date1.getTime())/1000+"s");
+                    //console.log("渲染完毕"+(date3.getTime()-date1.getTime())/1000+"s");
                 }
             })
         },
