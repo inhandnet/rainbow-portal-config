@@ -129,65 +129,72 @@ define(function(require){
             var network=new Object();
             //switch (self.wanPort){
             //    case "cellular 1":
-            if(self.wanPort.indexOf("cellular")!=-1){
-                network.wanPort="3G/LTE";
-                var cellular_arr=cellular_interface.find(function(one){
-                    return one[0]=="cellular 1";
-                });
-                var posSt=cellular_arr[2];
-                if(posSt==1){
-                    network.statusComment=locale.get("connected");
-                }else if(posSt==0){
-                    network.statusComment=locale.get("disconnected")
-                }
-                var posTime=cellular_arr[8];
-                if(posTime==0){
-                    network.connectTime=locale.get("disconnected");
-                }else if(posTime>0){
-                    network.connectTime=timeFormate(posTime);
-                }
-            }else if(self.wanPort.indexOf("dialer")!=-1){
-                network.wanPort="ADSL";
-                var arr_adsl=xdsl_interface.find(function (one) {
-                    return one[0].indexOf("dialer")!=-1;
-                });
-                var posSt=arr_adsl[2];
-                if(posSt=="1"){
-                    network.statusComment=locale.get("connected");
-                }else if(posSt=="0"){
-                    network.statusComment=locale.get("disconnected");
-                }
-                var posTime=arr_adsl[8];
-                if(posTime==0){
-                    network.connectTime=locale.get("disconnected");
-                }else if(posTime>0){
-                    network.connectTime=timeFormate(posTime);
-                }
-            }else if(self.wanPort.indexOf("vlan")!=-1){
-                var arr_vlan=svi_interface.find(function(one){
-                    return one[0]=="vlan 10";
-                });
-                if(arr_vlan) {
-                    //self.distinguish = arr_3[6];
-                    if(arr_vlan[6]=="1"){
-                        network.wanPort="DHCP";
-                    }else if(arr_vlan[6]=="0"){
-                        network.wanPort="Static IP"
-                    }
-                    var posSt=arr_vlan[2];
-                    if(posSt=="1"){
+            if(self.wanPort){
+                if(self.wanPort.indexOf("cellular")!=-1){
+                    network.wanPort="3G/LTE";
+                    var cellular_arr=cellular_interface.find(function(one){
+                        return one[0]=="cellular 1";
+                    });
+                    var posSt=cellular_arr[2];
+                    if(posSt==1){
                         network.statusComment=locale.get("connected");
-                    }else if(posSt=="0"){
-                        network.statusComment=locale.get("disconnected");
+                    }else if(posSt==0){
+                        network.statusComment=locale.get("disconnected")
                     }
-                    var posTime=arr_vlan[9];
+                    var posTime=cellular_arr[8];
                     if(posTime==0){
                         network.connectTime=locale.get("disconnected");
                     }else if(posTime>0){
                         network.connectTime=timeFormate(posTime);
                     }
+                }else if(self.wanPort.indexOf("dialer")!=-1){
+                    network.wanPort="ADSL";
+                    var arr_adsl=xdsl_interface.find(function (one) {
+                        return one[0].indexOf("dialer")!=-1;
+                    });
+                    var posSt=arr_adsl[2];
+                    if(posSt=="1"){
+                        network.statusComment=locale.get("connected");
+                    }else if(posSt=="0"){
+                        network.statusComment=locale.get("disconnected");
+                    }
+                    var posTime=arr_adsl[8];
+                    if(posTime==0){
+                        network.connectTime=locale.get("disconnected");
+                    }else if(posTime>0){
+                        network.connectTime=timeFormate(posTime);
+                    }
+                }else if(self.wanPort.indexOf("vlan")!=-1){
+                    var arr_vlan=svi_interface.find(function(one){
+                        return one[0]=="vlan 10";
+                    });
+                    if(arr_vlan) {
+                        //self.distinguish = arr_3[6];
+                        if(arr_vlan[6]=="1"){
+                            network.wanPort="DHCP";
+                        }else if(arr_vlan[6]=="0"){
+                            network.wanPort="Static IP"
+                        }
+                        var posSt=arr_vlan[2];
+                        if(posSt=="1"){
+                            network.statusComment=locale.get("connected");
+                        }else if(posSt=="0"){
+                            network.statusComment=locale.get("disconnected");
+                        }
+                        var posTime=arr_vlan[9];
+                        if(posTime==0){
+                            network.connectTime=locale.get("disconnected");
+                        }else if(posTime>0){
+                            network.connectTime=timeFormate(posTime);
+                        }
+                    }
                 }
+            }else{
+                network.wanPort=locale.get("unknown");
+                network.statusComment=locale.get("unknown");
+                network.connectTime=locale.get("unknown");
             }
+
                 //case "dialer xxx":
                 //    break;
                 //case "vlan 10":

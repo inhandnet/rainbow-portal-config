@@ -3,12 +3,12 @@
  */
 require.config({
     baseUrl:"js",
-    paths:{
+    paths:{//属性从moduleId的最左开始匹配(只能从这开始匹配)，将匹配部分替换为对应的属性值
         "jquery":"lib/jquery-1.11.1.min",
         "prototype":"lib/prototype",
         "lang":"../lang",
         "text":"lib/text",
-        "sweet":"lib/sweet-alert.min"
+        "lib/sweet/wo":"lib/sweet-alert.min"
     },
     shim:{
         "lib/jquery.validationEngine":["jquery"],
@@ -17,7 +17,7 @@ require.config({
         "tool/validator":["jquery"]
     }
 });
-require(["jquery","prototype","app/mainApp","sweet"],function($,prototype,mainApp){
+require(["jquery","prototype","app/mainApp","lib/sweet/wo"],function($,prototype,mainApp){
         $(document).ready(function($){
             //var language=navigator.language?navigator.language:navigator.userLanguage;
             //if(language.toLowerCase()=="zh-cn"){
@@ -30,20 +30,20 @@ require(["jquery","prototype","app/mainApp","sweet"],function($,prototype,mainAp
             });
             $("img.my-title-img").prop("src","images/Logo-InHand.png");
         });
-        //$("#config-quit").bind("click",function(e){
-        //    sweetAlert({
-        //            title: /*locale.get("awayFromConfig")*/"确定离开？",
-        //            //text: "You will not be able to recover this imaginary file!",
-        //            type: "warning",
-        //            showCancelButton: true,
-        //            cancelButtonText:/*locale.get("cancell")*/"取消",
-        //            confirmButtonColor: "#3F9B40",
-        //            confirmButtonText: /*locale.get("confirm")*/"确定",
-        //            closeOnConfirm: false
-        //        },
-        //        function () {
-        //            window.location.href="./logout.jsp";
-        //        })
-        //})
+        $("#config-quit").bind("click",function(e){
+            sweetAlert({
+                    title: /*locale.get("awayFromConfig")*/"确定离开？",
+                    //text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText:/*locale.get("cancell")*/"取消",
+                    confirmButtonColor: "#3F9B40",
+                    confirmButtonText: /*locale.get("confirm")*/"确定",
+                    closeOnConfirm: false
+                },
+                function () {
+                    window.location.href="./logout.jsp";
+                })
+        })
     }
 )
